@@ -1,0 +1,118 @@
+<app-user-header title="Employee" link="employee"></app-user-header>
+<c-container class="mt-3">
+  <c-row [ngStyle]="{ width: '100%' }">
+    <c-col>
+      <c-row class="g-0 customAlign">
+        <h3>Stock Requests</h3>
+
+        <c-row class="mt-3 mb-3">
+          <c-col class="customAlignDate">
+            <div class="col-xs-12 col-12 col-md-12 form-group customMargin">
+              <input
+                type="text"
+                placeholder="Date range"
+                class="form-control inputDisable"
+                bsDaterangepicker
+                [(ngModel)]="dateRange"
+                [bsConfig]="customBsConfig"
+              />
+            </div>
+
+            <button
+              title="Open Date Picker"
+              class="btn btn-outline-primary customMarginButton"
+              (click)="open()">
+              <svg cIcon [cIcon]="icons.cilCalendar"></svg>
+            </button>
+
+            <button
+            title="Reset Date Picker"
+            class="btn btn-outline-primary"
+            (click)="reset()">
+              <svg cIcon [cIcon]="icons.cilDelete"></svg>
+            </button>
+
+          </c-col>
+          <c-col>
+            <form class="d-flex">
+                <select class="form-select" #t (change)="onChangeSelect(t.value)">
+                  <option
+                    *ngFor="let status of statuses"
+                    [ngValue]="status"
+                    [value]="status"
+                    [label]="status"
+                  ></option>
+                </select>
+            </form>
+          </c-col>
+          <c-col>
+            <form class="d-flex" role="search">
+              <input
+                cFormControl
+                (search)="onSearch()"
+                [(ngModel)]="searchValue"
+                [value]="searchValue"
+                class="form-control me-2"
+                name="search"
+                type="search"
+                placeholder="Drug Code"
+              />
+              <button class="btn btn-outline-primary" type="button" (click)="onSearch()">Search</button>
+            </form>
+          </c-col>
+        </c-row>
+
+        <c-card
+          *ngFor="let request of requests"
+          [cBorder]="{ top: { color: 'info', width: 3 } }"
+          class="mb-3"
+        >
+          <c-row class="g-0">
+            <c-card-body cCol [md]="8">
+              <p cCardText>
+                <b>Id:</b> {{ request.id }} <br />
+                <b>Status:&nbsp;</b>
+                <b [ngStyle]="{ color: getColor(request.status) }">{{
+                  request.status
+                }}</b>
+                <br />
+                <b>Date:</b>
+                {{ request.requestDate | date: "dd/MM/yyyy HH:mm" }}
+              </p>
+            </c-card-body>
+            <table
+              *ngIf="request.details.length > 0"
+              cTable
+              hover
+              [responsive]="true"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">Drug Code</th>
+                  <th scope="col">Drug Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Stock</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let d of request.details">
+                  <td>{{ d.drug.code }}</td>
+                  <td>{{ d.drug.name }}</td>
+                  <td>{{ d.quantity }}</td>
+                  <td>{{ d.drug.stock }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </c-row>
+        </c-card>
+      </c-row>
+    </c-col>
+
+    <div *ngIf="requests.length === 0" class="alert alert-info" role="alert">
+      <h4 class="alert-heading">The list is empty.</h4>
+      <p>Please add some filters and click 'Search' to get some Stock Requests.</p>
+      <hr />
+    </div>
+
+  </c-row>
+</c-container>

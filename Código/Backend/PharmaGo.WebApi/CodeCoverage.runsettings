@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+				<Configuration>
+					<CodeCoverage>
+						<ModulePaths>
+							<Include>
+							</Include>
+							<Exclude>
+								<ModulePath>PharmaGo.Test.dll</ModulePath>
+								<ModulePath>ExportationModel.dll</ModulePath>
+								<ModulePath>moq.dll</ModulePath>
+							</Exclude>
+							<!-- Specifies additional list of directories where binaries static native instrumentation should be searched. -->
+							<IncludeDirectories>
+								<Directory Recursive="true"></Directory>
+							</IncludeDirectories>
+						</ModulePaths>
+						<!-- configuration elements -->
+						<Functions>
+							<Exclude>
+								<Function>PharmaGo.DataAccess.Migrations\..*</Function>
+								<Function>PharmaGo.BusinessLogic.ExportManager</Function>
+								<Function>PharmaGo.DataAccess.PharmacyGoDbContext</Function>
+								<Function>PharmaGo.WebApi.Filters\..*</Function>
+							</Exclude>
+						</Functions>
+					</CodeCoverage>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>

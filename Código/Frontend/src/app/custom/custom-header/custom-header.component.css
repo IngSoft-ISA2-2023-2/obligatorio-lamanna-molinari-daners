@@ -1,0 +1,39 @@
+.customButton{
+    margin: unset;
+    display: flex;
+    border: transparent;
+    background: transparent;
+}
+
+.customBadge{
+    margin-left: -5px;
+}
+
+
+.customWidth{
+    display: flex;
+}
+
+@media screen and (min-device-width: 100px) and (max-device-width: 620px) { 
+
+    .customWidth{
+        display: table;
+    }
+}
+
+
+.customToast{
+    z-index: 1200;
+    position: fixed;
+    top: auto!important;
+    bottom: 0!important;
+    right: 0!important;
+    left: 0!important;
+    margin: 0.5em;
+    width: auto;
+}
+
+.customToastBody{
+    text-align: center;
+    width: 100%;
+}

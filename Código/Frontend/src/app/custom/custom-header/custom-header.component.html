@@ -1,0 +1,62 @@
+<app-custom-toast></app-custom-toast>
+<c-container class="customWidth container-sm container-md container-lg container-xl container-xxl">
+  <c-header-brand routerLink="/home">
+    <b [ngStyle]="{ color: '#0dcaf0' }">Pharma</b> Go
+  </c-header-brand>
+  <div *ngIf="icons">
+    <c-header-nav>
+      <c-nav-item title="Cart">
+        <button class="customButton">
+          <a routerLink="/home/cart" cNavLink>
+            <svg cIcon name="cil-cart" size="lg"></svg>
+          </a>
+          <c-badge class="customBadge" color="info">{{ badge }}</c-badge>
+        </button>
+      </c-nav-item>
+      <c-nav-item title="Tracking">
+        <a routerLink="/home/tracking" cNavLink>
+          <svg cIcon name="cil-compass" size="lg"></svg>
+        </a>
+      </c-nav-item>
+    </c-header-nav>
+  </div>
+
+  <c-header-nav class="ms-auto">
+    <c-nav-item>
+      <form class="d-flex">
+        <div *ngIf="select">
+          <select class="form-select" #t (change)="onChangeSelect(t.value)">
+            <option [value]="0">All Pharmacys</option>
+            <option
+              *ngFor="let item of pharmacys"
+              [ngValue]="item.id"
+              [value]="item.id"
+              [label]="item.name"
+            ></option>
+          </select>
+        </div>
+      </form>
+    </c-nav-item>
+  </c-header-nav>
+
+  <c-header-nav class="ms-auto">
+    <c-nav-item>
+      <div *ngIf="search">
+        <form class="d-flex" role="search">
+          <input
+            cFormControl
+            (search)="onSearch()"
+            [(ngModel)]="searchValue"
+            [value]="searchValue"
+            class="form-control me-2"
+            name="search"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-info" type="button" (click)="onSearch()">Search</button>
+        </form>
+      </div>
+    </c-nav-item>
+  </c-header-nav>
+</c-container>

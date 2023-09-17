@@ -1,0 +1,25 @@
+<app-custom-toast></app-custom-toast>
+<ng-container>
+  <c-container [fluid]="true">
+    <button
+      toggle="visible"
+      cHeaderToggler
+      [cSidebarToggle]="sidebarId"
+      class="ps-1">
+      <svg cIcon name="cilCog" size="lg"></svg>
+    </button>
+    <c-header-brand routerLink="/{{link}}">
+      <b [ngStyle]="{ color: '#0dcaf0' }">Pharma</b> Go
+      <span [ngStyle]="{ 'font-size': 'small', 'font-weight': 'bold' }">{{title}} Panel</span>
+    </c-header-brand>
+    <c-header-nav class="d-none d-lg-flex me-auto">
+    </c-header-nav>
+    <c-header-nav alignment="end" variant="nav-item" class="d-none d-lg-flex">
+      <c-nav-item>
+        <a (click)="logout()" title="Logout" cNavLink>
+          <svg cIcon name="cilAccountLogout" size="lg"></svg>
+        </a>
+      </c-nav-item>
+    </c-header-nav>
+  </c-container>
+</ng-container>

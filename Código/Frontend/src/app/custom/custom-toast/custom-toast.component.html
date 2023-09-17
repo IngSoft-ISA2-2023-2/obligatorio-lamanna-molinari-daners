@@ -1,0 +1,22 @@
+<c-toast *ngIf="visible"
+  #toast="cToast"
+  [visible]="true"
+  [autohide]="true"
+  class="customToast align-items-center text-white border-0"
+  color={{color}}
+  placement="top-center"
+  position="fixed"
+>
+<div class="d-flex">
+    <c-toast-body class="customToastBody">
+      <span><b>{{title}} </b>{{message}}</span>
+    </c-toast-body>
+    <button
+      aria-label="close"
+      cButtonClose
+      white
+      class="me-2 m-auto"
+      (click)="onCloseToast()"
+    ></button>
+</div>
+</c-toast>

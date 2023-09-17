@@ -1,0 +1,16 @@
+
+.customButtons{
+    text-align: end;
+}
+
+.customCheckout {
+    margin-left: 10px;
+}
+
+@media screen and (min-device-width: 100px) and (max-device-width: 620px) { 
+
+    .customCheckout {
+        margin-left: 10px;
+        margin-top: 5px;
+    }
+}

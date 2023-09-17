@@ -1,0 +1,152 @@
+<app-user-header title="Employee" link="employee"></app-user-header>
+<c-container [fluid]="true"  class="mt-4">
+  <div class="row">
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-primary mb-0 mt-h">Drug</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Create
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+              routerLink="/employee/create-drug">
+              <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-primary mb-0 mt-h">Drug</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Delete
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted"
+          routerLink="/employee/delete-drug">
+          <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!--/.col-->
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-laptop bg-info p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-info mb-0 mt-h">Stock</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Create Request
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+          routerLink="/employee/create-request"
+            ><svg cIcon [cIcon]="icons.cilArrowThickRight"></svg></a>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-moon-o bg-warning p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-warning mb-0 mt-h">Purchase</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Approve / Reject Purchases
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+          routerLink="/employee/purchase-status">
+          <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+        </a>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+  </div><!--/.row-->
+</c-container>
+  <c-header-divider></c-header-divider>
+  <c-container [fluid]="true" class="mt-4">  
+    <div class="row">
+      <!--/.col-->
+      <div class="col-6 col-lg-3">
+        <div class="card">
+          <div class="card-block p-1 clearfix">
+            <i class="fa fa-bell bg-success p-1 font-2xl mr-1 float-left"></i>
+            <div class="h5 text-success mb-0 mt-h">Requests</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">
+              View Stock Requests
+            </div>
+          </div>
+          <div class="card-footer p-x-1 py-h customCardIcon">
+            <a class="font-weight-bold font-xs btn-block text-muted" 
+            routerLink="/employee/stock-request"
+              ><svg cIcon [cIcon]="icons.cilArrowThickRight"></svg></a>
+          </div>
+        </div>
+      </div>
+    <!--/.col-->
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-laptop bg-danger p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-danger mb-0 mt-h">Export Drugs</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            JSON File
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+              routerLink="/employee/export-drugs">
+            <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+            </a>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+    <!--
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-moon-o bg-warning p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-warning mb-0 mt-h">$1.999,50</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Income
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h">
+          <a class="font-weight-bold font-xs btn-block text-muted" href="#"
+            >View More <i class="fa fa-angle-right float-right font-lg"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-bell bg-danger p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-danger mb-0 mt-h">$1.999,50</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Income
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h">
+          <a class="font-weight-bold font-xs btn-block text-muted" href="#"
+            >View More <i class="fa fa-angle-right float-right font-lg"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  -->
+  </div>
+</c-container>

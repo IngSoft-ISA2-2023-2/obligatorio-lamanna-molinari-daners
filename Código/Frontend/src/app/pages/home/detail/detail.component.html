@@ -1,0 +1,63 @@
+<c-header class="customBody">
+  <app-custom-header
+    [icons]="true"
+    [select]="false"
+    [search]="false"
+    [ngStyle]="{ width: '100%' }"
+  >
+  </app-custom-header>
+  <c-header-divider></c-header-divider>
+  <c-container>
+    <c-row>
+      <c-col>
+        <div *ngIf="drug">
+          <c-card [cBorder]="{ top: { color: 'info', width: 3 } }" class="mb-3">
+            <c-row class="g-0">
+              <c-col [md]="4">
+                <img [cCardImg] src="assets/img/not_found.png" />
+              </c-col>
+              <c-card-body cCol [md]="8">
+                <h4 cCardTitle>{{ drug.name }}</h4>
+                <h5 class="card-subtitle mb-2 text-muted">
+                  {{ drug.pharmacy.name }}
+                </h5>
+                <p cCardText>
+                  <b>Code:</b> {{ drug.code }} <br />
+                  <b>Price:</b> {{ drug.price | currency }} <br />
+                  <b>Symptoms:</b> {{ drug.symptom }} <br />
+                  <b>Prescription:</b> {{ drug.prescription ? "Yes" : "No" }}
+                  <br />
+                  <b>Unit Measure:</b> {{ drug.unitMeasure }} <br />
+                  <b>Presentation:</b> {{ drug.presentation }}
+                </p>
+
+                <div [ngStyle]="{ 'text-align': 'end' }">
+                  <c-input-group class="mb-3 customQuantity">
+                    <label cInputGroupText for="quantityInput">
+                      Quantity
+                    </label>
+                    <input
+                      cFormControl
+                      [(ngModel)]="quantity"
+                      id="quantityInput"
+                      value="1"
+                      min="1"
+                      type="number"
+                    />
+                  </c-input-group>
+
+                  <button cButton color="primary" (click)="addToCart(drug)">
+                    Add to cart
+                    <svg cIcon name="cil-cart"></svg>
+                  </button>
+                </div>
+              </c-card-body>
+            </c-row>
+          </c-card>
+        </div>
+      </c-col>
+    </c-row>
+  </c-container>
+
+  <app-custom-footer class="bottomFooter"></app-custom-footer>
+</c-header>

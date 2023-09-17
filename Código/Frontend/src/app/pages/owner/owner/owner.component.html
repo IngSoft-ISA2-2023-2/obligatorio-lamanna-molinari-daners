@@ -1,0 +1,61 @@
+<app-user-header title="Owner" link="owner"></app-user-header>
+<c-container [fluid]="true"  class="mt-4">
+  <div class="row">
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-primary mb-0 mt-h">Invitation</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Create
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+              routerLink="/owner/invitation">
+              <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-success p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-success mb-0 mt-h">Stock request</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Approve / Reject
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted"
+          routerLink="/owner/stock-request">
+          <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!--/.col-->
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-laptop bg-warning p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-warning mb-0 mt-h">Purchases</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            By Date Range
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+          routerLink="/owner/purchase-by-date"
+            ><svg cIcon [cIcon]="icons.cilArrowThickRight"></svg></a>
+        </div>
+      </div>
+    </div>
+    <!--/.col-->
+    <!--/.col-->
+  </div><!--/.row-->
+</c-container>
+  <c-header-divider></c-header-divider>

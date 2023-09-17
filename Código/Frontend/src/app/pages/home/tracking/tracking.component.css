@@ -1,0 +1,11 @@
+.customAlign{
+    vertical-align: middle;
+}
+
+@media screen and (min-device-width: 100px) and (max-device-width: 620px) { 
+
+    .customInput{
+        width: inherit;
+        margin-bottom: 5px;
+    }
+}
