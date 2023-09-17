@@ -1,0 +1,56 @@
+<app-user-header title="Employee" link="employee"></app-user-header>
+<c-container class="mt-3">
+  <c-row [ngStyle]="{ width: '100%' }">
+    <c-col>
+      <c-row class="g-0 customAlign">
+        <h3>Export Drugs</h3>
+        <c-card [cBorder]="{ top: { color: 'info', width: 3 } }" class="mb-3 customAlign">
+          <c-row class="g-0">
+            <c-card-body cCol [md]="8">
+              <p cCardText></p>
+            </c-card-body>
+            <select
+              class="mb-3"
+              [(ngModel)]="selectedExporter"
+              aria-label="Default select"
+              cSelect
+              (change)="getParameters()"
+            >
+              <option selected>Select Exporter</option>
+              <option *ngFor="let exporter of exporters">{{ exporter }}</option>
+            </select>
+          </c-row>
+          <c-row class="g-0" *ngIf="selectedExporter && selectedExporter !== 'Select Exporter'">
+            <c-card class="mb-4">
+              <c-card-body>
+                <form (ngSubmit)="onSubmit()">
+                  <div
+                    *ngFor="let parameter of parameters; let i = index"
+                    class="mb-3"
+                  >
+                    <label cLabel for="inputName-1">{{
+                      parameter.inputName | uppercase 
+                    }}</label>
+                    <input
+                      class="mb-3"
+                      cFormControl
+                      id="inputName-1"
+                      [(ngModel)]="parameters[i].inputValue"
+                      name="{{ parameter.inputName }}"
+                    />
+                    <input
+                      cButton
+                      color="primary"
+                      type="submit"
+                      value="Export"
+                    />
+                  </div>
+                </form>
+              </c-card-body>
+            </c-card>
+          </c-row>
+        </c-card>
+      </c-row>
+    </c-col>
+  </c-row>
+</c-container>

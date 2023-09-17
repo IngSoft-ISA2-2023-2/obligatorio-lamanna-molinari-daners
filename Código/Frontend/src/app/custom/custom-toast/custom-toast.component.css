@@ -1,0 +1,15 @@
+.customToast{
+    z-index: 1200;
+    position: fixed;
+    top: auto!important;
+    bottom: 0!important;
+    right: 0!important;
+    left: 0!important;
+    margin: 0.5em;
+    width: auto;
+}
+
+.customToastBody{
+    text-align: center;
+    width: 100%;
+}

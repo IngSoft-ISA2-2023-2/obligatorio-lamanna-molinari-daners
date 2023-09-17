@@ -1,0 +1,105 @@
+<app-user-header title="Owner" link="owner"></app-user-header>
+<c-container class="mt-3">
+  <c-row [ngStyle]="{ width: '100%' }">
+    <c-col>
+      <c-row class="g-0 customAlign">
+        <h3>Purchases By Date Range</h3>
+
+        <div class="container mt-3">
+          <div class="row">
+            <c-col class="mb-3">
+              <c-row>
+                <c-col>
+                  <div class="col-xs-12 col-12 col-md-12 form-group">
+                    <input
+                      type="text"
+                      placeholder="Date range"
+                      class="form-control inputDisable"
+                      bsDaterangepicker
+                      [(ngModel)]="dateRange"
+                      [bsConfig]="customBsConfig"
+                    />
+                  </div>
+                </c-col>
+                <c-col class="customAlignDateRange">
+                  <button
+                    title="Open Date Picker"
+                    class="btn btn-outline-primary"
+                    (click)="open()"
+                  >
+                    <svg cIcon [cIcon]="icons.cilCalendar"></svg>
+                  </button>
+                </c-col>
+              </c-row>
+            </c-col>
+            <c-col class="mb-3">
+              <button
+                title="Search Purchases"
+                class="btn btn-primary"
+                (click)="getPurchasesByDate()"
+              >Search
+                <svg cIcon [cIcon]="icons.cilSearch"></svg>
+              </button>
+            </c-col>
+          </div>
+        </div>
+
+        <c-container class="mt-3">
+          <c-row [ngStyle]="{ width: '100%' }">
+            <c-col>
+              <c-card
+                *ngFor="let purchase of purchases"
+                [cBorder]="{ top: { color: 'info', width: 3 } }"
+                class="mb-3"
+              >
+                <c-row class="g-0">
+                  <c-card-body cCol [md]="8">
+                    <p cCardText>
+                      <b>Buyer:</b> {{ purchase.buyerEmail }} <br />
+                      <b>Date:</b>
+                      {{ purchase.purchaseDate | date: "dd/MM/yyyy HH:mm" }}
+                      <br />
+                      <b>Tracking Code:</b> {{ purchase.trackingCode }} <br />
+                      <b>Total:</b> {{ purchase.totalAmount | currency }}
+                    </p>
+                  </c-card-body>
+                  <table
+                    *ngIf="purchase !== undefined"
+                    cTable
+                    hover
+                    [responsive]="true"
+                  >
+                    <thead>
+                      <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit Price</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Pharmacy</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of purchase.details">
+                        <td>{{ item.code }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.price | currency }}</td>
+                        <td>{{ item.price * item.quantity | currency }}</td>
+                        <td>{{ item.pharmacyName }}</td>
+                        <td [ngStyle]="{ color: getColor(item.status) }">
+                          <b>{{ item.status }}</b>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </c-row>
+              </c-card>
+            </c-col>
+          </c-row>
+        </c-container>
+      </c-row>
+    </c-col>
+  </c-row>
+</c-container>

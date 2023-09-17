@@ -1,0 +1,105 @@
+<app-user-header title="Administrator" link="admin"></app-user-header>
+<c-container class="mt-3">
+  <c-container class="customWidth container-sm container-md container-lg container-xl container-xxl mb-3">
+    <c-header-nav class="ms-auto">
+      <c-nav-item>
+        <form class="d-flex">
+          <div *ngIf="select">
+            <select class="form-select" #t (change)="onPharmacyChange(t.value)">
+              <option [value]="0">All Pharmacys</option>
+              <option
+                *ngFor="let item of pharmacies"
+                [ngValue]="item.id"
+                [value]="item.name"
+                [label]="item.name"
+              ></option>
+            </select>
+          </div>
+        </form>
+      </c-nav-item>
+    </c-header-nav>
+    <c-header-nav class="ms-auto">
+      <c-nav-item>
+        <form class="d-flex">
+          <div *ngIf="select">
+            <select class="form-select" #t (change)="onRoleChange(t.value)">
+              <option [value]="0">All Roles</option>
+              <option
+                *ngFor="let item of roles"
+                [ngValue]="item.id" 
+                [value]="item.name"
+                [label]="item.name"
+              ></option>
+            </select>
+          </div>
+        </form>
+      </c-nav-item>
+    </c-header-nav>
+    <c-header-nav class="ms-auto">
+      <c-nav-item>
+        <div *ngIf="search">
+          <form class="d-flex" role="search">
+            <input
+              cFormControl
+              (search)="onSearch()"
+              [(ngModel)]="userName"
+              [value]="userName"
+              class="form-control me-2"
+              name="search"
+              type="search"
+              placeholder="User name"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-info" type="button" (click)="onSearch()">Search</button>
+          </form>
+        </div>
+      </c-nav-item>
+    </c-header-nav>
+  </c-container>
+
+
+  <c-row [ngStyle]="{ width: '100%' }">
+    <c-col>
+      <c-card
+        [cBorder]="{ top: { color: 'info', width: 3 } }"
+        class="mb-3">
+        <c-row class="g-0">
+          <table
+          cTable
+          hover
+          [responsive]="true">
+          <thead>
+              <tr>
+                  <th scope="col">Pharmacy</th>
+                  <th scope="col">User Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">User Code</th>
+                  <th scope="col">Active</th>
+                  <th scope="col"></th>
+                </tr>
+          </thead>
+          <tbody *ngFor="let invitation of invitations">
+              <tr>
+                  <td>{{ invitation.pharmacy !== null ? invitation.pharmacy.name : "" }}</td>
+                  <td>{{ invitation.userName }}</td>
+                  <td>{{ invitation.role.name }}</td>
+                  <td>{{ invitation.userCode }}</td>
+                  <td>{{ invitation.isActive ? "Yes" : "No" }}</td>
+                  <td>
+                    <button
+                      *ngIf="invitation.isActive == true"
+                      title="Update"
+                      cButton
+                      color="primary"
+                      (click)="update(invitation.id)">Update
+                      <svg  cIcon [cIcon]="icons.cilSync"></svg>
+                    </button>
+                  </td>
+              </tr>
+          </tbody>
+          </table>
+        </c-row>
+      </c-card>
+    </c-col>
+  </c-row>
+</c-container>

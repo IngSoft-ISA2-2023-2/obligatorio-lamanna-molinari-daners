@@ -1,0 +1,58 @@
+<app-user-header title="Administrator" link="admin"></app-user-header>
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <c-container>
+      <c-row class="justify-content-center mt-3 mb-3">
+        <c-col lg="7" md="9" xl="6">
+          <c-card class="mx-4">
+            <c-card-body class="p-4">
+              <form cForm [formGroup]="form" class="customAlign">
+                <h3>Create Invitation</h3>
+                <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon [cIcon]="icons.cilShortText"></svg>
+                    </span>
+                    <select class="form-select" formControlName="pharmacyControl">
+                      <option [ngValue]=""></option>
+                      <option
+                        *ngFor="let item of pharmacies"
+                        [ngValue]="item.name"
+                      >{{item.name}}</option>
+                    </select>
+                </c-input-group>
+                <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon [cIcon]="icons.cilPencil"></svg>
+                    </span>
+                    <input
+                      formControlName="userName" 
+                      autoComplete="userName" 
+                      cFormControl 
+                      placeholder="User name" />
+                 </c-input-group>
+                 <c-input-group class="mb-3">
+                    <span cInputGroupText>
+                      <svg cIcon [cIcon]="icons.cilShortText"></svg>
+                    </span>
+                    <select class="form-select" formControlName="roleControl">
+                      <option
+                        *ngFor="let item of roles"
+                        [ngValue]="item.name"
+                      >{{item.name}}</option>
+                    </select>
+                </c-input-group>
+                <div class="d-grid">
+                    <button 
+                    (click)="createInvitation()"
+                    class="customButton" 
+                    cButton 
+                    color="primary">
+                      Create Invitation
+                    </button>
+                  </div>
+              </form>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+    </c-container>
+</div>

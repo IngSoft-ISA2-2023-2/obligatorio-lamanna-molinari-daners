@@ -1,0 +1,60 @@
+<app-user-header title="Employee" link="employee"></app-user-header>
+<c-container class="mt-3">
+  <c-row [ngStyle]="{ width: '100%' }">
+    <c-col>
+      <c-row class="g-0 customAlign">
+        <h3>Delete Drug</h3>
+        <table 
+          *ngIf="drugs.length > 0"
+          cTable
+          hover
+          [responsive]="true">
+          <thead>
+            <tr>
+              <th scope="col">Code</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Pharmacy</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let drug of drugs">
+              <td>{{ drug.code }}</td>
+              <td>{{ drug.name }}</td>
+              <td>{{ drug.price | currency }}</td>
+              <td>{{ drug.pharmacy.name }}</td>
+              <td>
+                <button
+                  title="Delete"
+                  class="btn btn-outline-danger"
+                  (click)="deleteDrug(drug.id)">
+                  <svg cIcon [cIcon]="icons.cilX"></svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </c-row>
+    </c-col>
+  </c-row>
+</c-container>
+
+<c-modal [visible]="visible">
+  <c-modal-header
+    class="rejectBackground"
+  >
+    <h5 cModalTitle class="textBackground">{{ modalTitle }}</h5>
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>{{ modalMessage }}</c-modal-body>
+  <c-modal-footer>
+    <button (click)="closeModal()" cButton color="secondary">No</button>
+    <button
+      cButton
+      (click)="saveModal($event)"
+      color="'danger">
+      Yes
+    </button>
+  </c-modal-footer>
+</c-modal>

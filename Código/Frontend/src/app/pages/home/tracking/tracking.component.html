@@ -1,0 +1,118 @@
+<c-header class="customBody">
+  <app-custom-header
+    [icons]="true"
+    [select]="false"
+    [search]="false"
+    [ngStyle]="{ width: '100%' }"
+  >
+  </app-custom-header>
+  <c-header-divider></c-header-divider>
+  <c-container>
+    <c-row [ngStyle]="{ width: '100%' }">
+      <c-col>
+        <h3 [ngStyle]="{ 'text-align': 'center' }">Tracking</h3>
+        <c-input-group class="mb-3">
+          <label cInputGroupText for="CodeInput"> Code </label>
+          <input
+            [(ngModel)]="code"
+            class="customInput"
+            id="CodeInput"
+            aria-label="Code"
+            cFormControl
+            type="input"
+            placeholder="Please enter a tracking code..."
+          />
+          <div [ngStyle]="{ 'text-align': 'end', 'padding-left': '10px' }">
+            <button
+              (click)="getPurchaseByTrackingCode()"
+              cButton
+              color="primary">
+              Track your purchase
+              <svg cIcon name="cil-compass"></svg>
+            </button>
+          </div>
+        </c-input-group>
+
+        <c-card
+          *ngIf="purchase !== undefined"
+          [cBorder]="{ top: { color: 'info', width: 3 } }"
+          class="mb-3">
+          <c-row class="g-0">
+            <c-card-body cCol [md]="8">
+              <p cCardText>
+                <b>Buyer:</b> {{ purchase.buyerEmail }} <br />
+                <b>Date:</b>
+                {{ purchase.purchaseDate | date: "dd/MM/yyyy HH:mm" }} <br />
+                <b>Total:</b> {{ purchase.totalAmount | currency }}
+              </p>
+            </c-card-body>
+            <table
+              *ngIf="purchase !== undefined"
+              cTable
+              hover
+              [responsive]="true">
+              <thead>
+                <tr>
+                  <th scope="col">Code</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Pharmacy</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let item of purchase.details;
+                    let indexOfelement = index">
+                  <td>{{ item.code }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.price  | currency}}</td>
+                  <td>{{ (item.price * item.quantity) | currency}}</td>
+                  <td>{{ item.pharmacyName }}</td>
+                  <td [ngStyle]="{ color: getColor(item.status) }">
+                    <b>{{ item.status }}</b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </c-row>
+        </c-card>
+        <c-card
+          *ngIf="tracking !== undefined"
+          [cBorder]="{ top: { color: 'info', width: 3 } }"
+          class="mb-3">
+          <h6
+            *ngIf="tracking.length > 0"
+            [ngStyle]="{ 'text-align': 'center' }">
+            Last 5 tracked codes
+          </h6>
+          <c-row class="g-0">
+            <table *ngIf="tracking.length > 0" cTable hover [responsive]="true">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Tracking Code</th>
+                  <th scope="col">QR</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let code of tracking.slice().reverse();let indexOfelement = index">
+                  <td class="customAlign">{{ indexOfelement + 1 }}</td>
+                  <td class="customAlign">{{ code }}</td>
+                  <td>
+                    <qrcode [qrdata]="code" [width]="100" [errorCorrectionLevel]="'M'"></qrcode>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </c-row>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+  <app-custom-footer class="bottomFooter"></app-custom-footer>
+</c-header>

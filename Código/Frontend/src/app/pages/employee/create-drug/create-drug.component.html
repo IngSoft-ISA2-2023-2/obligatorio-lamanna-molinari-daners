@@ -1,0 +1,116 @@
+<app-user-header title="Employee" link="employee"></app-user-header>
+<div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+  <c-container>
+    <c-row class="justify-content-center mt-3 mb-3">
+      <c-col lg="7" md="9" xl="6">
+        <c-card class="mx-4">
+          <c-card-body class="p-4">
+            <form cForm [formGroup]="form" class="customAlign">
+              <h3>Create Drug</h3>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilBarcode"></svg>
+                </span>
+                <input
+                  autoComplete="code"
+                  cFormControl
+                  placeholder="Code"
+                  formControlName="code"
+                />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilPencil"></svg>
+                </span>
+                <input
+                  formControlName="name" 
+                  autoComplete="name" 
+                  cFormControl 
+                  placeholder="Name" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilAlignCenter"></svg>
+                </span>
+                <input 
+                  formControlName="symptom"
+                  autoComplete="symptom" 
+                  cFormControl 
+                  placeholder="Symptom" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilLoop1"></svg>
+                </span>
+                <input
+                  cFormControl
+                  type="number"
+                  placeholder="Quantity"
+                  value="1" 
+                  min="1" 
+                  formControlName="quantity"
+                />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilDollar"></svg>
+                </span>
+                <input
+                  autoComplete="price"
+                  cFormControl
+                  placeholder="Price"
+                  type="input"
+                  formControlName="price"
+                />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilTask"></svg>
+                </span>
+                <input aria-label="Prescription" placeholder="Prescription" disabled cFormControl />
+                <span cInputGroupText>
+                  <c-form-check>
+                    <input cFormCheckInput  
+                    formControlName="prescriptionControl" 
+                    type="checkbox" />
+                  </c-form-check>
+                </span>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilLibrary"></svg>
+                </span>
+                <select class="form-select" formControlName="unitMeasureControl">
+                  <option
+                    *ngFor="let item of unitMeasure"
+                    [ngValue]="item.id"
+                  >{{item.name}}</option>
+                </select>
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon [cIcon]="icons.cilPaint"></svg>
+                </span>
+                <select class="form-select" formControlName="presentationControl">
+                  <option
+                    *ngFor="let item of presentation"
+                    [ngValue]="item.id"
+                  >{{item.name}}</option>
+                </select>
+              </c-input-group>
+              <div class="d-grid">
+                <button 
+                (click)="createDrug()"
+                class="customButton" 
+                cButton 
+                color="primary">
+                  Create Drug
+                </button>
+              </div>
+            </form>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+</div>

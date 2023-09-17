@@ -1,0 +1,39 @@
+<c-header class="customBody">
+<app-custom-header [icons]="true" [select]="true" 
+  [search]="true" [ngStyle]="{ width: '100%' }"> 
+</app-custom-header>
+  <c-header-divider></c-header-divider>
+  <c-container>
+    <c-row>
+      <c-col>
+        <c-card 
+        [cBorder]="{top: {color: 'info', width: 3}}" 
+        class="mb-3" 
+        *ngFor="let drug of drugs">
+          <c-row class="g-0">
+            <c-col [md]="4">
+              <img [cCardImg] src="assets/img/not_found.png" />
+            </c-col>
+            <c-card-body cCol [md]="8">
+              <h4 cCardTitle>{{ drug.name }}</h4>
+              <h5 class="card-subtitle mb-2 text-muted"> 
+                {{ drug.pharmacy.name }}
+              </h5>
+              <p cCardText> 
+                <b>Symptoms:</b> {{ drug.symptom }} <br>
+                <b>Price:</b> {{ drug.price | currency}}
+              </p>
+              <div [ngStyle]="{ 'text-align': 'end' }">
+              <button cButton color="primary" [routerLink]="['/home/detail', drug.id]">
+                View Details
+                <svg cIcon name="cil-plus"></svg>
+              </button>
+            </div>
+            </c-card-body>
+          </c-row>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+  <app-custom-footer class="bottomFooter"></app-custom-footer>
+</c-header>

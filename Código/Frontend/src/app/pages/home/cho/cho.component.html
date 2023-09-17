@@ -1,0 +1,49 @@
+<c-header class="customBody">
+  <app-custom-header
+    [icons]="false"
+    [select]="false"
+    [search]="false"
+    [ngStyle]="{ width: '100%' }"
+  >
+  </app-custom-header>
+  <c-header-divider></c-header-divider>
+  <c-container>
+    <c-row [ngStyle]="{ width: '100%' }">
+      <c-col>
+        <h3 [ngStyle]="{ 'text-align': 'center' }">Checkout</h3>
+        <c-input-group class="mb-3">
+          <label cInputGroupText for="EmailInput"> e-mail </label>
+          <input
+            [(ngModel)]="email"
+            [value]="email"
+            id="EmailInput"
+            aria-label="Email"
+            cFormControl
+            type="email"
+            placeholder="Please enter your e-mail..."
+          />
+        </c-input-group>
+
+        <c-card [cBorder]="{ top: { color: 'info', width: 3 } }" class="mb-3">
+          <c-row class="g-0">
+            <c-card-body cCol [md]="8">
+              <h4 cCardTitle>Total</h4>
+              <div [ngStyle]="{ 'text-align': 'end' }">
+                <h4 class="card-subtitle mb-2 text-muted"><br>{{total | currency}}<br/></h4>
+              </div>
+            </c-card-body>
+          </c-row>
+        </c-card>
+
+        <div class="mb-3" [ngStyle]="{ 'text-align': 'end' }">
+          <button [disabled]="(total && total > 0) ? null: 'disabled'" cButton color="primary" (click)="finishPurchase()">
+            Finish Purchase
+            <svg cIcon name="cil-thumb-up"></svg>
+          </button>
+        </div>
+      </c-col>
+    </c-row>
+  </c-container>
+
+  <app-custom-footer class="bottomFooter"></app-custom-footer>
+</c-header>
