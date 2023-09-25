@@ -27,11 +27,8 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Debug
-      run: ls 
-
     - name: Go to project directory
-      run: cd "Código\Backend"
+      run: cd "Código/Backend"
           
     - name: Install dependencies
       run: dotnet restore
