@@ -27,6 +27,9 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    - name: Debug
+      run: ls 
+
     - name: Go to project directory
       run: cd "Código\Backend"
           
