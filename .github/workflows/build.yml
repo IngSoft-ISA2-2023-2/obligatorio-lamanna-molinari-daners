@@ -27,13 +27,10 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    - name: Go to project directory
-      run: cd "Código/Backend"
-    - name: aaaaaa
-      run: ls 
-          
     - name: Install dependencies
-      run: dotnet restore
+      run: |
+        cd "Código\Backend"
+        dotnet restore
       
     - name: Build
       run: dotnet build --configuration Release --no-restore
