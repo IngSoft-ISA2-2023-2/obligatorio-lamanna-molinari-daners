@@ -29,6 +29,8 @@ jobs:
 
     - name: Go to project directory
       run: cd "Código/Backend"
+    - name: aaaaaa
+      run: ls 
           
     - name: Install dependencies
       run: dotnet restore
