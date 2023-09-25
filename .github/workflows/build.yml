@@ -34,4 +34,4 @@ jobs:
       run: dotnet build --configuration Release --no-restore Código/Backend/PharmaGo.sln
 
     - name: Run Unit Tests
-      run: dotnet test Código/Backend/PharnaGo.Tests/PharmaGo.Tests.csproj
+      run: dotnet test Código/Backend/PharmaGo.Tests/PharmaGo.Tests.csproj
