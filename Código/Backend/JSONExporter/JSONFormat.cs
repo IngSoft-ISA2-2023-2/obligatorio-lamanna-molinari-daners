@@ -25,6 +25,7 @@ namespace JSONExporter
 
             string json = JsonConvert.SerializeObject(drugDtos);
             string absolutePath = Path.GetFullPath(path);
+            absolutePath = Path.ChangeExtension(absolutePath, "json");
             File.WriteAllText(absolutePath, json);
         }
 
