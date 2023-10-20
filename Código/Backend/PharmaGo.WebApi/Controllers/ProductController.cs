@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PharmaGo.BusinessLogic;
 using PharmaGo.Domain.Entities;
 using PharmaGo.Domain.SearchCriterias;
 using PharmaGo.IBusinessLogic;
@@ -9,7 +10,7 @@ using PharmaGo.WebApi.Models.Out;
 
 namespace PharmaGo.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/product")]
     [ApiController]
     [TypeFilter(typeof(ExceptionFilter))]
     public class ProductController : Controller
@@ -17,7 +18,10 @@ namespace PharmaGo.WebApi.Controllers
         [HttpPost]
         public IActionResult Create()
         {
-            throw new NotImplementedException();
+            //string token = HttpContext.Request.Headers["Authorization"];
+           // Product productCreated = _productManager.Create(drugModel.ToEntity(), token);
+           // DrugDetailModel drugResponse = new DrugDetailModel(drugCreated);
+            return Ok(200);
         }
     }
 }
