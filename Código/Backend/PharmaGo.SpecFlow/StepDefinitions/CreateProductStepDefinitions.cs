@@ -21,34 +21,35 @@ namespace PharmaGo.SpecFlow.StepDefinitions
         }
 
         [Given(@"The name ""([^""]*)""")]
-        public void GivenTheName(string nombre)
+        public void GivenTheName(string name)
         {
-            _product.Name = nombre;
+            _product.Name = name;
         }
 
-        [Given(@"the description ""([^""]*)""")]
-        public void GivenTheDescription(string descripcion)
+        [Given(@"la descripcion ""([^""]*)""")]
+        public void GivenLaDescripcion(string descripcion)
         {
             _product.Description = descripcion;
         }
 
-        [Given(@"the code ""([^""]*)""")]
-        public void GivenTheCode(int code)
+
+        [Given(@"el codigo ""([^""]*)""")]
+        public void GivenElCodigo(string code)
         {
             _product.Code = code;
         }
 
-        [Given(@"the price ""([^""]*)""")]
-        public void GivenThePrice(decimal price)
+        [Given(@"el precio ""([^""]*)""")]
+        public void GivenElPrecio(int price)
         {
             _product.Price = price;
         }
 
-        [When(@"A ""([^""]*)"" is created with the values")]
-        public async Task WhenAIsCreatedWithTheValues(string operation)
+        [When(@"Un product es creado mediante el ""([^""]*)"" con el endpoint")]
+        public async Task WhenUnProductEsCreadoMedianteElConElEndpoint(string operation)
         {
             string requestBody = JsonConvert.SerializeObject(new { nombre = _product.Name, descripcion = _product.Description, codigo = _product.Code, precio = _product.Price });
-            var request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:7186/api/product")
+            var request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:41123/api/product")
             {
                 Content = new StringContent(requestBody)
                 {
@@ -58,7 +59,7 @@ namespace PharmaGo.SpecFlow.StepDefinitions
                         }
                 }
             };
-
+            // if (false) { } //
             // create an http client
             var client = new HttpClient();
             // let's post
@@ -68,20 +69,17 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             try
             {
                 context.Set(response.StatusCode, "ResponseStatusCode");
+                context.Set(response.Content, "ReponseMessage");
             } finally
             {
                 //move along
             }
         }
 
-        [Then(@"i receive the response with the ""([^""]*)"" and ""([^""]*)""")]
-        public void ThenIReceiveTheResponseWithTheAnd(int statusCode, string message)
+        [Then(@"recibo una respuesta con el codigo ""([^""]*)""")]
+        public void ThenReciboUnaRespuestaConElCodigoYElMensaje(int statusCode)
         {
-            Console.Write(context);
-
-
             Assert.AreEqual(statusCode, (int)context.Get<HttpStatusCode>("ResponseStatusCode"));
-            // Assert.AreEqual(message, context.Get<HttpResponse>("ResponseStatusCode"));
         }
     }
 }

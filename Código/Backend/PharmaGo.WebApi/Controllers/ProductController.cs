@@ -21,7 +21,8 @@ namespace PharmaGo.WebApi.Controllers
             //string token = HttpContext.Request.Headers["Authorization"];
            // Product productCreated = _productManager.Create(drugModel.ToEntity(), token);
            // DrugDetailModel drugResponse = new DrugDetailModel(drugCreated);
-            return Ok(200);
+           var response = Ok("Producto creado correctamente");
+            return response;
         }
     }
 }
