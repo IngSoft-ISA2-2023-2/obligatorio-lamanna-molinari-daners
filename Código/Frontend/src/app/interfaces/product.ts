@@ -15,7 +15,7 @@ export interface Product {
     name: string;
     price: number;
     description: string;
-    pharmacyName: string;
+    pharmacyName: string = "";
 
     constructor(code: string, name: string, price: number, description: string, pharmacyName: string){
       this.code = code;

@@ -79,11 +79,12 @@ export class ProductService {
 
   /** POST Create Product */
   createProduct(product: ProductRequest): Observable<Product> {
-    return this.http.post<Product>(this.url, product, {headers: this.getHttpHeaders() })
+   return this.http.post<Product>(this.url, product, {headers: this.getHttpHeaders() })
     .pipe(
       tap(),
       catchError(this.handleError<Product>('Create Product'))
     );
+   
   }
 
   /** DELETE Delete Product */

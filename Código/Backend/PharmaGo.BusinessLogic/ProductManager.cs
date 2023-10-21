@@ -30,6 +30,10 @@ namespace PharmaGo.BusinessLogic
 
         public Product Create(Product product, string token)
         {
+            if (product == null)
+            {
+                throw new ResourceNotFoundException("Please create a product before inserting it.");
+            }
             product.ValidOrFail();
 
             var guidToken = new Guid(token);
@@ -47,7 +51,8 @@ namespace PharmaGo.BusinessLogic
             {
                 throw new InvalidResourceException("The drug already exists in that pharmacy.");
             }
-
+            
+            product.Pharmacy.Id = pharmacyofProduct.Id;
             _productRepository.InsertOne(product);
             _productRepository.Save();
             return product;

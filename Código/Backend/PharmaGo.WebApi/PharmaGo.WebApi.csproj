@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PharmaGo.BusinessLogic\PharmaGo.BusinessLogic.csproj" />
     <ProjectReference Include="..\PharmaGo.Exceptions\PharmaGo.Exceptions.csproj" />
     <ProjectReference Include="..\PharmaGo.Factory\PharmaGo.Factory.csproj" />
     <ProjectReference Include="..\PharmaGo.IBusinessLogic\PharmaGo.IBusinessLogic.csproj" />

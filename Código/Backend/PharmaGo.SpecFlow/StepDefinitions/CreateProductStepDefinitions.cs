@@ -47,33 +47,36 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             _product.Price = price;
         }
 
-        [When(@"Un product es creado mediante el ""([^""]*)"" con el endpoint")]
-        public async Task WhenUnProductEsCreadoMedianteElConElEndpoint(string operation)
+        [When(@"Un product es creado por el empleado con el token ""([^""]*)"" mediante el ""([^""]*)"" con el endpoint")]
+        public async Task WhenUnProductEsCreadoPorElEmpleadoConElTokenMedianteElConElEndpoint(string token, string product)
         {
-            string requestBody = JsonConvert.SerializeObject(new { nombre = _product.Name, descripcion = _product.Description, codigo = _product.Code, precio = _product.Price });
-            var request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:41123/api/product")
+
+        string requestBody = JsonConvert.SerializeObject(new { nombre = _product.Name, descripcion = _product.Description, codigo = _product.Code, precio = _product.Price, pharmacyName = "Farmacia 1234" });
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:41123/api/product")
             {
                 Content = new StringContent(requestBody)
                 {
                     Headers =
                         {
-                          ContentType = new MediaTypeHeaderValue("application/json")
+                          ContentType = new MediaTypeHeaderValue("application/json"),
+                          
                         }
                 },
             };
-            if (false) { } //
-            // create an http client
+
+            request.Headers.Authorization = new AuthenticationHeaderValue(token);
+
+
             var client = new HttpClient();
-            // let's post
-            request.Headers.Authorization = new AuthenticationHeaderValue("e9e0e1e9-3812-4eb5-949e-ae92ac931401");
+          
             //Employee1
             var response = await client.SendAsync(request).ConfigureAwait(false);
-            
-       
+
+           
             try
             {
                 context.Set(response.StatusCode, "ResponseStatusCode");
-                context.Set(response.Content, "ReponseMessage");
+                
             } finally
             {
                 //move along
@@ -84,6 +87,7 @@ namespace PharmaGo.SpecFlow.StepDefinitions
         public void ThenReciboUnaRespuestaConElCodigoYElMensaje(int statusCode)
         {
             Assert.AreEqual(statusCode, (int)context.Get<HttpStatusCode>("ResponseStatusCode"));
+
         }
     }
 }

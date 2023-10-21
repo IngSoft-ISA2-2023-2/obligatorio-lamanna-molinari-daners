@@ -92,7 +92,7 @@ namespace PharmaGo.SpecFlow.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void CrearProductoValidoConTodosLosDatos(string nombre, string descripcion, string codigo, string precio, string controller, string codeResponse, string[] exampleTags)
+        public virtual void CrearProductoValidoConTodosLosDatos(string nombre, string descripcion, string codigo, string precio, string controller, string codeResponse, string token, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
@@ -102,6 +102,7 @@ namespace PharmaGo.SpecFlow.Features
             argumentsOfScenario.Add("precio", precio);
             argumentsOfScenario.Add("controller", controller);
             argumentsOfScenario.Add("codeResponse", codeResponse);
+            argumentsOfScenario.Add("token", token);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo(": Crear producto válido con todos los datos", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 7
 this.ScenarioInitialize(scenarioInfo);
@@ -126,7 +127,8 @@ this.ScenarioInitialize(scenarioInfo);
     testRunner.And(string.Format("el precio \"{0}\"", precio), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
-    testRunner.When(string.Format("Un product es creado mediante el \"{0}\" con el endpoint", controller), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+    testRunner.When(string.Format("Un product es creado por el empleado con el token \"{0}\" mediante el \"{1}\" con el " +
+                            "endpoint", token, controller), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
     testRunner.Then(string.Format("recibo una respuesta con el codigo \"{0}\"", codeResponse), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -145,10 +147,11 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "200")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant0()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion prueba", "12345", "100", "product", "200", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion prueba", "12345", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -162,10 +165,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion prueba", "1
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "200")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant1()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre test 2", "descripcion prueba 2", "12346", "100", "product", "200", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre test 2", "descripcion prueba 2", "12346", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -179,10 +183,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre test 2", "descripcion prueba 2"
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant2()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("", "descripcion prueba", "12347", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("", "descripcion prueba", "12347", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -196,10 +201,11 @@ this.CrearProductoValidoConTodosLosDatos("", "descripcion prueba", "12347", "100
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant3()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre test", "", "12348", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre test", "", "12348", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -213,10 +219,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre test", "", "12348", "100", "pro
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant4()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion", "", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion", "", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -230,10 +237,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion", "", "100"
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant5()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre muy largo con mas de 30.", "descripcion", "12350", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre muy largo con mas de 30.", "descripcion", "12350", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -247,10 +255,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre muy largo con mas de 30.", "des
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant6()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre test", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae sagittis.", "12351", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre test", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae sagittis.", "12351", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -264,10 +273,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre test", "Lorem ipsum dolor sit a
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "-1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant7()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion prueba", "12352", "-1", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion prueba", "12352", "-1", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -281,10 +291,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre test", "descripcion prueba", "1
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant8()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre", "descripcion prueba", "1234", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre", "descripcion prueba", "1234", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
         
@@ -298,10 +309,11 @@ this.CrearProductoValidoConTodosLosDatos("nombre", "descripcion prueba", "1234",
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:precio", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "400")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
         public void CrearProductoValidoConTodosLosDatos_Variant9()
         {
 #line 7
-this.CrearProductoValidoConTodosLosDatos("nombre", "descripcion prueba", "123456", "100", "product", "400", ((string[])(null)));
+this.CrearProductoValidoConTodosLosDatos("nombre", "descripcion prueba", "123456", "100", "product", "400", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
 #line hidden
         }
     }
