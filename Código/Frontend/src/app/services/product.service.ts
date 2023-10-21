@@ -78,7 +78,7 @@ export class ProductService {
   }
 
   /** POST Create Product */
-  createDrug(product: ProductRequest): Observable<Product> {
+  createProduct(product: ProductRequest): Observable<Product> {
     return this.http.post<Product>(this.url, product, {headers: this.getHttpHeaders() })
     .pipe(
       tap(),

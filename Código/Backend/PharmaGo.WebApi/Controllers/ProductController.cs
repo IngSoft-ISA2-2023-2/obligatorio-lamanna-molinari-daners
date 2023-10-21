@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PharmaGo.BusinessLogic;
 using PharmaGo.Domain.Entities;
-using PharmaGo.Domain.SearchCriterias;
 using PharmaGo.IBusinessLogic;
 using PharmaGo.WebApi.Enums;
 using PharmaGo.WebApi.Filters;
@@ -15,14 +13,21 @@ namespace PharmaGo.WebApi.Controllers
     [TypeFilter(typeof(ExceptionFilter))]
     public class ProductController : Controller
     {
-        [HttpPost]
-        public IActionResult Create()
+        private readonly IProductManager _productManager;
+
+        public ProductController(IProductManager productManager)
         {
-            //string token = HttpContext.Request.Headers["Authorization"];
-           // Product productCreated = _productManager.Create(drugModel.ToEntity(), token);
-           // DrugDetailModel drugResponse = new DrugDetailModel(drugCreated);
-           var response = Ok("Producto creado correctamente");
-            return response;
+            _productManager = productManager;
+        }
+
+        [HttpPost]
+        [AuthorizationFilter(new string[] {nameof(RoleType.Employee)})]
+        public IActionResult Create([FromBody] ProductModel productModel)
+        {
+           string token = HttpContext.Request.Headers["Authorization"];
+           Product productCreated = _productManager.Create(productModel.ToEntity(), token);
+           ProductDetailModel drugResponse = new ProductDetailModel(productCreated);
+           return Ok(drugResponse);
         }
     }
 }

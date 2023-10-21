@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Build.Evaluation;
 using Newtonsoft.Json;
 using PharmaGo.Domain.Entities;
+using SpecFlow.Internal.Json;
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Headers;
 using TechTalk.SpecFlow;
@@ -57,12 +59,14 @@ namespace PharmaGo.SpecFlow.StepDefinitions
                         {
                           ContentType = new MediaTypeHeaderValue("application/json")
                         }
-                }
+                },
             };
-            // if (false) { } //
+            if (false) { } //
             // create an http client
             var client = new HttpClient();
             // let's post
+            request.Headers.Authorization = new AuthenticationHeaderValue("e9e0e1e9-3812-4eb5-949e-ae92ac931401");
+            //Employee1
             var response = await client.SendAsync(request).ConfigureAwait(false);
             
        

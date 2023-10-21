@@ -26,6 +26,7 @@ namespace PharmaGo.Factory
             serviceCollection.AddScoped<IUnitMeasureManager, UnitMeasureManager>();
             serviceCollection.AddScoped<IExportManager, ExportManager>();
             serviceCollection.AddScoped<IRoleManager, RoleManager>();
+            serviceCollection.AddScoped<IProductManager, ProductManager>();
         }
 
         public static void RegisterDataAccessServices(this IServiceCollection serviceCollection, IConfiguration configuration)
@@ -42,6 +43,7 @@ namespace PharmaGo.Factory
             serviceCollection.AddScoped<IRepository<Drug>, DrugRepository>();
             serviceCollection.AddScoped<IRepository<PurchaseDetail>, PurchasesDetailRepository>();
             serviceCollection.AddScoped<IRepository<Role>, RoleRepository>();
+            serviceCollection.AddScoped<IRepository<Product>, ProductRepository>();
 
             serviceCollection.AddDbContext<DbContext, PharmacyGoDbContext>(o => o.UseSqlServer(configuration.GetConnectionString("PharmaGo")));
         }
