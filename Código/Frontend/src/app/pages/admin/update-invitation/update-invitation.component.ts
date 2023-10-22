@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { Pharmacy } from "src/app/interfaces/pharmacy";
 import { Role } from "src/app/interfaces/role";
 import { CommonService } from "src/app/services/CommonService";
@@ -10,6 +9,7 @@ import { RoleService } from "src/app/services/role.service";
 import { cilShortText, cilPencil, cilSync } from '@coreui/icons';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Invitation } from "src/app/interfaces/invitation";
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 @Component({
     selector: 'app-update-invitation',
@@ -52,7 +52,7 @@ export class UpdateInvitationComponent implements OnInit {
     getInvitationById(id: any): void {
         this.invitationService
         .getInvitationById(id)
-        .subscribe((invitation) => {
+        .subscribe((invitation: any) => {
             this.invitation = invitation;
             console.log(invitation);
 
@@ -74,7 +74,7 @@ export class UpdateInvitationComponent implements OnInit {
     getPharmacies(): void {
         this.pharmacyService
         .getPharmacys()
-        .subscribe((pharmacies) => {
+        .subscribe((pharmacies: Pharmacy[]) => {
             this.pharmacies = pharmacies;
             
         })
@@ -82,7 +82,7 @@ export class UpdateInvitationComponent implements OnInit {
     getRoles(): void {
         this.roleService
         .getRoles()
-        .subscribe((roles) => {
+        .subscribe((roles: Role[]) => {
             this.roles = roles;
         })
     }
@@ -122,7 +122,7 @@ export class UpdateInvitationComponent implements OnInit {
 
 
     newUserCode(): void {
-        this.invitationService.getNewUserCode().subscribe((invitation) => {
+        this.invitationService.getNewUserCode().subscribe((invitation: { userCode: string; }) => {
             console.log(invitation.userCode);
             this.setDefaultUserCode(invitation.userCode);
         })
@@ -136,7 +136,7 @@ export class UpdateInvitationComponent implements OnInit {
         let id = this.invitation_id;
 
         let invitationRequest = new InvitationRequest(pharmacyName, userName, roleName, userCode);
-        this.invitationService.updateInvitation(id, invitationRequest).subscribe((invitation) => {
+        this.invitationService.updateInvitation(id, invitationRequest).subscribe((invitation: any) => {
             if (invitation){
                 this.commonService.updateToastData("Success updating invitation", 'success', 'Invitation updated.');
             }

@@ -87,6 +87,14 @@ export class ProductService {
    
   }
 
+  updateProduct(id: number, product: ProductRequest) : Observable<Product> {
+    const url = `${this.url}/${id}`;
+    return this.http.put<Product>(url, product, {headers: this.getHttpHeaders()}).pipe(
+      tap(),
+      catchError(this.handleError<Product>('Update Product'))
+    );
+  }
+
   /** DELETE Delete Product */
   deleteProduct(id: number): Observable<any> {
     const url = `${this.url}/${id}`;
