@@ -15,6 +15,7 @@ namespace PharmaGo.BusinessLogic
         private readonly IRepository<Pharmacy> _pharmacysRepository;
         private readonly IRepository<Drug> _drugsRepository;
         private readonly IRepository<PurchaseDetail> _purchaseDetailRepository;
+        private readonly IRepository<PurchaseDetailProduct> _purchaseDetailProductRepository;
         private readonly IRepository<Session> _sessionRepository;
         private readonly IRepository<User> _userRepository;
 
@@ -26,6 +27,7 @@ namespace PharmaGo.BusinessLogic
                                 IRepository<Pharmacy> pharmacysRepository,
                                 IRepository<Drug> drugsRepository,
                                 IRepository<PurchaseDetail> purchaseDetailRepository,
+                                IRepository<PurchaseDetailProduct> productRepository,
                                 IRepository<Session> sessionRespository,
                                 IRepository<User> userRespository)
         {
@@ -33,6 +35,7 @@ namespace PharmaGo.BusinessLogic
             _pharmacysRepository = pharmacysRepository;
             _drugsRepository = drugsRepository;
             _purchaseDetailRepository = purchaseDetailRepository;
+            _purchaseDetailProductRepository = productRepository;
             _sessionRepository = sessionRespository;
             _userRepository = userRespository;
         }
@@ -44,7 +47,7 @@ namespace PharmaGo.BusinessLogic
             if (string.IsNullOrEmpty(purchase.BuyerEmail) || !rgEmail.IsMatch(purchase.BuyerEmail))
                 throw new InvalidResourceException("Invalid Email");
 
-            if ((purchase.details == null || purchase.details.Count == 0))
+            if ((purchase.details == null || purchase.details.Count == 0 ||  purchase.products == null ||  purchase.products.Count == 0))
                 throw new InvalidResourceException("The list of items can't be empty");
 
             if (purchase.PurchaseDate == DateTime.MinValue)
@@ -75,6 +78,32 @@ namespace PharmaGo.BusinessLogic
                 detail.Drug = drug;
                 detail.Status = PENDING;
             }
+
+            foreach (var product in purchase.products)
+            {
+                int pharmacyId = product.Pharmacy.Id;
+                if (pharmacyId <= 0)
+                    throw new ResourceNotFoundException($"Pharmacy Id is a mandatory field");
+
+                var pharmacy = _pharmacysRepository.GetOneByExpression(x => x.Id == pharmacyId);
+                if (pharmacy is null)
+                    throw new ResourceNotFoundException($"Pharmacy {product.Pharmacy.Id} not found");
+
+                if (product.Quantity <= 0)
+                    throw new InvalidResourceException("The Quantity is a mandatory field");
+
+                string productCode = product.Product.Code;
+                var theProduct = pharmacy.Products.FirstOrDefault(x => x.Code == productCode && x.Deleted == false);
+                if (theProduct is null)
+                    throw new ResourceNotFoundException($"Product {productCode} not found in Pharmacy {pharmacy.Name}");
+
+                product.Pharmacy = pharmacy;
+                total = total + (theProduct.Price * product.Quantity);
+                product.Price = theProduct.Price;
+                product.Product = theProduct;
+                product.Status = PENDING;
+            }
+
             purchase.TotalAmount = total;
             purchase.TrackingCode = generateTrackingCode();
             _purchasesRepository.InsertOne(purchase);

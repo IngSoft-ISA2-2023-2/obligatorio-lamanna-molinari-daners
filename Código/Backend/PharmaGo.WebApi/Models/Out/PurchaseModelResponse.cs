@@ -1,4 +1,5 @@
-﻿using PharmaGo.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc.Controllers;
+using PharmaGo.Domain.Entities;
 using static PharmaGo.WebApi.Models.In.PurchaseModelRequest;
 
 namespace PharmaGo.WebApi.Models.Out
@@ -11,8 +12,21 @@ namespace PharmaGo.WebApi.Models.Out
         public string TrackingCode { get; set; }
         public decimal TotalAmount { get; set; }
         public ICollection<PurchaseDetailModelResponse>? Details { get; set; }
+        public ICollection<PurchaseDetailProductModelResponse>? Products {  get; set; }
 
         public class PurchaseDetailModelResponse
+        {
+            public int Id { get; set; }
+            public string Code { get; set; }
+            public string Name { get; set; }
+            public int Quantity { get; set; }
+            public decimal Price { get; set; }
+            public int PharmacyId { get; set; }
+            public string PharmacyName { get; set; }
+            public string Status { get; set; }
+        }
+
+        public class PurchaseDetailProductModelResponse
         {
             public int Id { get; set; }
             public string Code { get; set; }
@@ -46,6 +60,25 @@ namespace PharmaGo.WebApi.Models.Out
                 });
                 }
             }
+            Products = new List<PurchaseDetailProductModelResponse>();
+            if(purchase.products != null)
+            {
+                foreach (var product in purchase.products)
+                {
+                    Products.Add(new PurchaseDetailProductModelResponse
+                    {
+                        Id = product.Id,
+                        Name = product.Product.Name,
+                        Code = product.Product.Code,
+                        Price = product.Product.Price,
+                        PharmacyId = product.Product.Pharmacy.Id,
+                        PharmacyName = product.Product.Pharmacy.Name,
+                        Status = product.Status
+                    });
+                }
+            }
         }
+
+        
     }
 }
