@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { cilPencil, cilShortText, cilSync } from '@coreui/icons';
-import { Product, ProductRequest } from 'src/app/interfaces/product';
+import { Product, ProductRequest, UpdateProductRequest } from 'src/app/interfaces/product';
 import { CommonService } from 'src/app/services/CommonService';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -75,17 +75,17 @@ export class UpdateProductComponent implements OnInit {
   }
 
   get product_id() {
-    return this.form.controls.productControl;
+    return this.form.controls.productControl.value;
   }
 
   updateProduct(): void {
     let name = this.product_name.value ? this.product_name.value : "";
-    let price = this.price_value.value ? this.price_value.value : "";
+    let price = this.price_value.value ? this.price_value.value : 0;
     let description = this.description_value.value ? this.description_value.value : "";
     let code = this.code_value.value ? this.code_value.value : "";
-    let id = this.product_id;
+    let id = parseInt(this.product_id);
 
-    let productRequest = new ProductRequest(code, name, price, description, "");
+    let productRequest = new UpdateProductRequest(code, name, price, description);
     this.productService.updateProduct(id, productRequest).subscribe((product: any) => {
       if (product) {
         this.commonService.updateToastData("Success updating product", 'success', 'Product updated.');

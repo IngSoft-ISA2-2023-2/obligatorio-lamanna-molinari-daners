@@ -1,25 +1,22 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Evaluation;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using PharmaGo.BusinessLogic;
-using PharmaGo.DataAccess.Repositories;
 using PharmaGo.DataAccess;
+using PharmaGo.DataAccess.Repositories;
 using PharmaGo.Domain.Entities;
 using PharmaGo.IDataAccess;
 using PharmaGo.WebApi.Controllers;
 using PharmaGo.WebApi.Models.In;
 using System;
-using System.Net;
-using System.Net.Http.Headers;
+using System.Reflection.Emit;
+using System.Xml.Linq;
 using TechTalk.SpecFlow;
-
 
 namespace PharmaGo.SpecFlow.StepDefinitions
 {
     [Binding]
-    public class DeleteProductStepDefinitions
+    public class UpdateProductStepDefinitions
     {
         private PharmacyGoDbContext theDbContext;
         private IRepository<Product> theProductRepository;
@@ -29,14 +26,14 @@ namespace PharmaGo.SpecFlow.StepDefinitions
 
         private ProductManager productManager;
         private ProductController productController;
-        private int _productId;
-
+        private UpdateProductModel productModel;
+        private int _productToChangeId;
         private IActionResult result;
 
         [BeforeScenario]
         public void Setup()
         {
-            var connectionString = "Server=DESKTOP-O360J65\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True";
+            var connectionString = "Server=DESKTOP-O360J65\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True"; //agregar connection string a db
             var optionsBuilder = new DbContextOptionsBuilder<PharmacyGoDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
@@ -49,15 +46,13 @@ namespace PharmaGo.SpecFlow.StepDefinitions
 
             productManager = new ProductManager(theProductRepository, thePharmacyRepository, theSessionRepository, theUserRepository);
             productController = new ProductController(productManager);
-
-            
+            productModel = new UpdateProductModel();
 
         }
 
-        [Given(@"I am an authorized employee deleting a product")]
-        public void GivenIAmAnAuthorizedEmployeeDeletingAProduct()
+        [Given(@"I am an authorized employee who selected the product with code ""([^""]*)""")]
+        public void GivenIAmAnAuthorizedEmployeeWhoSelectedTheProductWithCode(string oldCode)
         {
-         
             var httpContext = new DefaultHttpContext();
             httpContext.Request.Headers["Authorization"] = "E9E0E1E9-3812-4EB5-949E-AE92AC931401";
 
@@ -65,40 +60,76 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             {
                 HttpContext = httpContext,
             };
-        }
 
-        [When(@"I choose the product with code ""([^""]*)"" to be deleted")]
-        public void WhenIChooseTheProductWithCodeToBeDeleted(string code)
-        {
             ProductModel p = new ProductModel()
             {
                 Name = "name",
-                Code = code,
+                Code = oldCode,
                 Description = "description",
                 Price = 100
             };
             try
             {
                 productController.Create(p);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
             
-            Product product = theProductRepository.GetOneByExpression(p => p.Code == code);
-            _productId = product.Id;
+            Product product = theProductRepository.GetOneByExpression(p => p.Code == oldCode);
+            _productToChangeId = product.Id;
 
         }
 
-        [Then(@"the response status code should be ""([^""]*)""")]
-        public void ThenTheResponseStatusCodeShouldBe(string codeResponse)
+        [When(@"I update a product with the new name ""([^""]*)""")]
+        public void WhenIUpdateAProductWithTheNewName(string name)
         {
-            result = productController.Delete(_productId);
+            productModel.Name = name;
+        }
+
+        [When(@"the new description ""([^""]*)""")]
+        public void WhenTheNewDescription(string description)
+        {
+            productModel.Description = description;
+        }
+
+        [When(@"the new code ""([^""]*)""")]
+        public void WhenTheNewCode(string code)
+        {
+            productModel.Code = code;
+        }
+
+        [When(@"the new price ""([^""]*)""")]
+        public void WhenTheNewPrice(string price)
+        {
+            productModel.Price = decimal.Parse(price);
+        }
+
+        [Then(@"the response code should be ""([^""]*)""")]
+        public void ThenTheResponseCodeShouldBe(string statusCode)
+        {
+            result = productController.Update(_productToChangeId, productModel);
             var response = result as ObjectResult;
             int responseCode = response.StatusCode.Value;
-            Assert.AreEqual(responseCode, int.Parse(codeResponse));
+            Assert.AreEqual(responseCode, int.Parse(statusCode));
         }
 
-       
+
+        [Then(@"the error response message should be ""([^""]*)""")]
+        public void ThenTheErrorResponseMessageShouldBe(string message)
+        {
+            try
+            {
+                result = productController.Update(_productToChangeId, productModel);
+
+                var response = result as ObjectResult;
+
+            }
+            catch (Exception e)
+            {
+                Assert.AreEqual(message, e.Message);
+            }
+        }
     }
 }

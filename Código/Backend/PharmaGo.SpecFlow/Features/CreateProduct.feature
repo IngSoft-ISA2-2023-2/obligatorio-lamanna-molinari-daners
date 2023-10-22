@@ -15,10 +15,10 @@ Scenario: Successful product creation
     Then the response status should be "<codeResponse>"
 
 Examples: 
-    | name                            | description                                                                    | code   | price | controller | codeResponse | token                                | codeMessage                            |
-    | nombre test                     | descripcion prueba                                                             | 12345  | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | a                                      |
-    | nombre test 2                   | descripcion prueba 2                                                           | 12346  | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | a                                      |
-  
+    | name                            | description                                                                    | code   | price | controller | codeResponse | token                                |                           
+    | nombre test                     | descripcion prueba                                                             | 12345  | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 |                                       
+    | nombre test 2                   | descripcion prueba 2                                                           | 12346  | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 |                                      
+
 Scenario: UnSuccessful product creation
     Given I am an authorized employee
     When I add a new product with the name "<name>" 
@@ -37,5 +37,5 @@ Examples:
     | nombre test                     | descripcion prueba                                                             | 12352  | -1    | product    | 455          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | The Product was not correctly created. |
     | nombre                          | descripcion prueba                                                             | 1234   | 100   | product    | 455          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | The Product format is incorrect        |
     | nombre                          | descripcion prueba                                                             | 123456 | 100   | product    | 455          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | The Product format is incorrect        |
-    | nombre                          | descripcion prueba                                                             | 12345 | 100   | product     | 455          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | The product already exists in that pharmacy.     |
+    | nombre                          | descripcion prueba                                                             | 12353 | 100   | product     | 455          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | The product already exists in that pharmacy.     |
   

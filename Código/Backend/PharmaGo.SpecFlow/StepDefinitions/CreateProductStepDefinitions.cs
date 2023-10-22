@@ -122,19 +122,12 @@ namespace PharmaGo.SpecFlow.StepDefinitions
         {
             try
             {
-                // Dispose of the DbContext and other disposable resources here
-                theDbContext?.Dispose();
-            }
-            catch (Exception ex)
+                Product p = theProductRepository.GetOneByExpression(p => p.Code == productModel.Code);
+                if (p != null) { productController.Delete(p.Id); }
+            }catch(Exception e)
             {
-                // Log or handle any exceptions that occur during disposal
-                Console.WriteLine($"Error occurred during teardown: {ex.Message}");
-            }
-            finally
-            {
-                // Ensure that theDbContext is set to null after disposal
-                theDbContext = null;
-            }
+
+            }           
         }
 
 

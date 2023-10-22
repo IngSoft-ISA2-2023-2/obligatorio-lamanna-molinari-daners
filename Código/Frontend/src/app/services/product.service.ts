@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Product, ProductRequest } from '../interfaces/product';
+import { Product, ProductRequest, UpdateProductRequest } from '../interfaces/product';
 import { environment } from '../../environments/environment';
 import { CommonService } from './CommonService';
 import { StorageManager } from '../utils/storage-manager';
@@ -69,7 +69,7 @@ export class ProductService {
   }
 
   getProductByUser(): Observable<Product[]> {
-    const url = `${this.url}/user`;
+    const url = `${this.url}`;
     return this.http.get<Product[]>(url, {headers: this.getHttpHeaders() })
       .pipe(
         tap(),
@@ -87,7 +87,7 @@ export class ProductService {
    
   }
 
-  updateProduct(id: number, product: ProductRequest) : Observable<Product> {
+  updateProduct(id: number, product: UpdateProductRequest) : Observable<Product> {
     const url = `${this.url}/${id}`;
     return this.http.put<Product>(url, product, {headers: this.getHttpHeaders()}).pipe(
       tap(),

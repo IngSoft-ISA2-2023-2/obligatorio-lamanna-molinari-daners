@@ -12,5 +12,5 @@ Scenario: Successful product deletion
 
 Examples: 
     | codeProduct | codeResponse |
-    | 12345       | 200          |
-    | 12346       | 200          |
+    | 12370       | 200          |
+    | 12371       | 200          |

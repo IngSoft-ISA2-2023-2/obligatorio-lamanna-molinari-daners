@@ -1,4 +1,5 @@
 ﻿using PharmaGo.Domain.Entities;
+using PharmaGo.Domain.SearchCriterias;
 using PharmaGo.Exceptions;
 using PharmaGo.IBusinessLogic;
 using PharmaGo.IDataAccess;
@@ -71,14 +72,77 @@ namespace PharmaGo.BusinessLogic
             _productRepository.Save();
         }
 
+        public IEnumerable<Product> GetAll(ProductSearchCriteria productSearchCriteria)
+        {
+            Product productToSearch = new Product();
+            if (productSearchCriteria.PharmacyId == null)
+            {
+                productToSearch.Name = productSearchCriteria.Name;
+            }
+            else
+            {
+                Pharmacy pharmacySaved = _pharmacyRepository.GetOneByExpression(p => p.Id == productSearchCriteria.PharmacyId);
+                if (pharmacySaved != null)
+                {
+                    productToSearch.Name = productSearchCriteria.Name;
+                    productToSearch.Pharmacy = pharmacySaved;
+                }
+                else
+                {
+                    throw new ResourceNotFoundException("The pharmacy to get products of does not exist.");
+                }
+            }
+            return _productRepository.GetAllByExpression(productSearchCriteria.Criteria(productToSearch));
+
+        }
+
         public Product GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Product Update(int id, Product drug)
+        public Product Update(int id, Product updateProduct, string token)
         {
-            throw new NotImplementedException();
+            if (updateProduct == null)
+            {
+                throw new ResourceNotFoundException("The updated product is invalid.");
+            }
+          
+            var productSaved = _productRepository.GetOneByExpression(d => d.Id == id);
+            if (productSaved == null)
+            {
+                throw new ResourceNotFoundException("The product to update does not exist.");
+            }
+
+            var guidToken = new Guid(token);
+            Session session = _sessionRepository.GetOneByExpression(s => s.Token == guidToken);
+            var userId = session.UserId;
+            User user = _userRepository.GetOneDetailByExpression(u => u.Id == userId);
+
+            if (_productRepository.Exists(d => d.Code == updateProduct.Code && d.Pharmacy.Name == user.Pharmacy.Name))
+            {
+                throw new InvalidResourceException("A product with that code already exists in that pharmacy.");
+            }
+            if (updateProduct.Code != "")
+            {
+                productSaved.Code = updateProduct.Code;
+            }
+            if (updateProduct.Name != "")
+            {
+                productSaved.Name = updateProduct.Name;
+            }
+            if (updateProduct.Price != 0)
+            {
+                productSaved.Price = updateProduct.Price;
+            }
+            if (updateProduct.Description != "")
+            {
+                productSaved.Description = updateProduct.Description;
+            }
+            productSaved.ValidOrFail();
+            _productRepository.UpdateOne(productSaved);
+            _productRepository.Save();
+            return productSaved;
         }
     }
 }
