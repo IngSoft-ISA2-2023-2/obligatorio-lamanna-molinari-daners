@@ -78,6 +78,7 @@ import { PurchaseByDateComponent } from './pages/owner/purchase-by-date/purchase
 // Owner
 import { InvitationComponent } from './pages/owner/invitation/invitation.component';
 import { StockRequestOwnerComponent } from './pages/owner/stock-request-owner/stock-request-owner.component';
+import { DeleteProductComponent } from './pages/employee/delete-product/delete-product.component';
 
 
 @NgModule({
@@ -119,6 +120,7 @@ import { StockRequestOwnerComponent } from './pages/owner/stock-request-owner/st
     PurchaseByDateComponent,
     InvitationComponent,
     StockRequestOwnerComponent,
+    DeleteProductComponent,
   
     
 

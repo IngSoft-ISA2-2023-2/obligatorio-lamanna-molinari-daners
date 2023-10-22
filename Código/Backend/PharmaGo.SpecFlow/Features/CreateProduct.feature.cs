@@ -92,7 +92,7 @@ namespace PharmaGo.SpecFlow.Features
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void SuccessfulProductCreation(string name, string description, string code, string price, string controller, string codeResponse, string token, string[] exampleTags)
+        public virtual void SuccessfulProductCreation(string name, string description, string code, string price, string controller, string codeResponse, string token, string codeMessage, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "productCreation"};
@@ -109,6 +109,7 @@ namespace PharmaGo.SpecFlow.Features
             argumentsOfScenario.Add("controller", controller);
             argumentsOfScenario.Add("codeResponse", codeResponse);
             argumentsOfScenario.Add("token", token);
+            argumentsOfScenario.Add("codeMessage", codeMessage);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successful product creation", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
@@ -143,10 +144,10 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12345")]
@@ -154,18 +155,19 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "200")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant0()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "a")]
+        public void SuccessfulProductCreation_NombreTest()
         {
 #line 9
-this.SuccessfulProductCreation("nombre test", "descripcion prueba", "12345", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+this.SuccessfulProductCreation("nombre test", "descripcion prueba", "12345", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "a", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: nombre test 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "nombre test 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre test 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12346")]
@@ -173,18 +175,63 @@ this.SuccessfulProductCreation("nombre test", "descripcion prueba", "12345", "10
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "200")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant1()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "a")]
+        public void SuccessfulProductCreation_NombreTest2()
         {
 #line 9
-this.SuccessfulProductCreation("nombre test 2", "descripcion prueba 2", "12346", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+this.SuccessfulProductCreation("nombre test 2", "descripcion prueba 2", "12346", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "a", ((string[])(null)));
 #line hidden
         }
         
+        public virtual void UnSuccessfulProductCreation(string name, string description, string code, string price, string controller, string codeResponse, string token, string codeMessage, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("name", name);
+            argumentsOfScenario.Add("description", description);
+            argumentsOfScenario.Add("code", code);
+            argumentsOfScenario.Add("price", price);
+            argumentsOfScenario.Add("controller", controller);
+            argumentsOfScenario.Add("codeResponse", codeResponse);
+            argumentsOfScenario.Add("token", token);
+            argumentsOfScenario.Add("codeMessage", codeMessage);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("UnSuccessful product creation", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 23
+    testRunner.Given("I am an authorized employee", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 24
+    testRunner.When(string.Format("I add a new product with the name \"{0}\"", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 25
+    testRunner.And(string.Format("the description \"{0}\"", description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 26
+    testRunner.And(string.Format("the code \"{0}\"", code), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 27
+    testRunner.And(string.Format("the price \"{0}\"", price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 28
+    testRunner.Then(string.Format("the response message should be \"{0}\"", codeMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12347")]
@@ -192,18 +239,18 @@ this.SuccessfulProductCreation("nombre test 2", "descripcion prueba 2", "12346",
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant2()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product was not correctly created.")]
+        public void UnSuccessfulProductCreation_Variant0()
         {
-#line 9
-this.SuccessfulProductCreation("", "descripcion prueba", "12347", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("", "descripcion prueba", "12347", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product was not correctly created.", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12348")]
@@ -211,18 +258,18 @@ this.SuccessfulProductCreation("", "descripcion prueba", "12347", "100", "produc
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant3()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product was not correctly created.")]
+        public void UnSuccessfulProductCreation_Variant1()
         {
-#line 9
-this.SuccessfulProductCreation("nombre test", "", "12348", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre test", "", "12348", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product was not correctly created.", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "")]
@@ -230,18 +277,18 @@ this.SuccessfulProductCreation("nombre test", "", "12348", "100", "product", "45
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant4()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product was not correctly created.")]
+        public void UnSuccessfulProductCreation_Variant2()
         {
-#line 9
-this.SuccessfulProductCreation("nombre test", "descripcion", "", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre test", "descripcion", "", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product was not correctly created.", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre muy largo con mas de 30.")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12350")]
@@ -249,18 +296,18 @@ this.SuccessfulProductCreation("nombre test", "descripcion", "", "100", "product
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant5()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product format is incorrect")]
+        public void UnSuccessfulProductCreation_Variant3()
         {
-#line 9
-this.SuccessfulProductCreation("nombre muy largo con mas de 30.", "descripcion", "12350", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre muy largo con mas de 30.", "descripcion", "12350", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product format is incorrect", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 4")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae sagittis.")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12351")]
@@ -268,18 +315,18 @@ this.SuccessfulProductCreation("nombre muy largo con mas de 30.", "descripcion",
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant6()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product format is incorrect")]
+        public void UnSuccessfulProductCreation_Variant4()
         {
-#line 9
-this.SuccessfulProductCreation("nombre test", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae sagittis.", "12351", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre test", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae sagittis.", "12351", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product format is incorrect", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 5")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre test")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12352")]
@@ -287,18 +334,18 @@ this.SuccessfulProductCreation("nombre test", "Lorem ipsum dolor sit amet, conse
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant7()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product was not correctly created.")]
+        public void UnSuccessfulProductCreation_Variant5()
         {
-#line 9
-this.SuccessfulProductCreation("nombre test", "descripcion prueba", "12352", "-1", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre test", "descripcion prueba", "12352", "-1", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product was not correctly created.", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 6")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 6")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "1234")]
@@ -306,18 +353,18 @@ this.SuccessfulProductCreation("nombre test", "descripcion prueba", "12352", "-1
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant8()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product format is incorrect")]
+        public void UnSuccessfulProductCreation_Variant6()
         {
-#line 9
-this.SuccessfulProductCreation("nombre", "descripcion prueba", "1234", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre", "descripcion prueba", "1234", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product format is incorrect", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product creation: Variant 9")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 7")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 9")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 7")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "123456")]
@@ -325,10 +372,30 @@ this.SuccessfulProductCreation("nombre", "descripcion prueba", "1234", "100", "p
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
-        public void SuccessfulProductCreation_Variant9()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The Product format is incorrect")]
+        public void UnSuccessfulProductCreation_Variant7()
         {
-#line 9
-this.SuccessfulProductCreation("nombre", "descripcion prueba", "123456", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", ((string[])(null)));
+#line 22
+this.UnSuccessfulProductCreation("nombre", "descripcion prueba", "123456", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The Product format is incorrect", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("UnSuccessful product creation: Variant 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "CreateProduct")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 8")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "nombre")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion prueba")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12345")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:price", "100")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "455")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:token", "E9E0E1E9-3812-4EB5-949E-AE92AC931401")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeMessage", "The product already exists in that pharmacy.")]
+        public void UnSuccessfulProductCreation_Variant8()
+        {
+#line 22
+this.UnSuccessfulProductCreation("nombre", "descripcion prueba", "12345", "100", "product", "455", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "The product already exists in that pharmacy.", ((string[])(null)));
 #line hidden
         }
     }

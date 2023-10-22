@@ -12,6 +12,8 @@ namespace PharmaGo.Domain.Entities
         public decimal Price { get; set; }
         public Pharmacy? Pharmacy { get; set; }
 
+        public bool Deleted { get; set; }
+
         public void ValidOrFail()
         {
             if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Price <= 0 || string.IsNullOrEmpty(Description))

@@ -117,7 +117,25 @@ namespace PharmaGo.SpecFlow.StepDefinitions
            
         }
 
-
+        [AfterScenario]
+        public void Teardown()
+        {
+            try
+            {
+                // Dispose of the DbContext and other disposable resources here
+                theDbContext?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle any exceptions that occur during disposal
+                Console.WriteLine($"Error occurred during teardown: {ex.Message}");
+            }
+            finally
+            {
+                // Ensure that theDbContext is set to null after disposal
+                theDbContext = null;
+            }
+        }
 
 
     }

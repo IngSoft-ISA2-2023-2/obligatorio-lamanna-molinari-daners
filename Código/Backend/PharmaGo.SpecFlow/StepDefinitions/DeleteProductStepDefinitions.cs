@@ -1,7 +1,15 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Evaluation;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PharmaGo.BusinessLogic;
+using PharmaGo.DataAccess.Repositories;
+using PharmaGo.DataAccess;
 using PharmaGo.Domain.Entities;
+using PharmaGo.IDataAccess;
+using PharmaGo.WebApi.Controllers;
+using PharmaGo.WebApi.Models.In;
 using System;
 using System.Net;
 using System.Net.Http.Headers;
@@ -13,60 +21,87 @@ namespace PharmaGo.SpecFlow.StepDefinitions
     [Binding]
     public class DeleteProductStepDefinitions
     {
+        private PharmacyGoDbContext theDbContext;
+        private IRepository<Product> theProductRepository;
+        private IRepository<Pharmacy> thePharmacyRepository;
+        private IRepository<Session> theSessionRepository;
+        private IRepository<User> theUserRepository;
 
-        private readonly Product _product = new Product();
-        private readonly ScenarioContext context;
+        private ProductManager productManager;
+        private ProductController productController;
+        private int _productId;
 
-        public DeleteProductStepDefinitions(ScenarioContext context)
-        {
-            this.context = context;
-        }
-        
-        [Given(@"La id de producto ""([^""]*)""")]
-        public void GivenLaIdDeProducto(int id)
-        {
-            _product.Id = id;
-        }
+        private IActionResult result;
 
-        [When(@"Un producto es eliminado mediante el ""([^""]*)"" con el endpoint")]
-        public async Task WhenUnProductoEsEliminadoMedianteElConElEndpoint(string product)
+        [BeforeScenario]
+        public void Setup()
         {
-            string requestBody = JsonConvert.SerializeObject(new { id = _product.Id});
-            var request = new HttpRequestMessage(HttpMethod.Delete, $"http://localhost:41123/api/{product}")
-            {
-                Content = new StringContent(requestBody)
-                {
-                    Headers =
-                        {
-                          ContentType = new MediaTypeHeaderValue("application/json")
-                        }
-                }
-            };
+            var connectionString = "Server=DESKTOP-O360J65\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True";
+            var optionsBuilder = new DbContextOptionsBuilder<PharmacyGoDbContext>();
+            optionsBuilder.UseSqlServer(connectionString);
+
+            theDbContext = new PharmacyGoDbContext(optionsBuilder.Options);
+
+            theProductRepository = new ProductRepository(theDbContext);
+            thePharmacyRepository = new PharmacyRepository(theDbContext);
+            theSessionRepository = new SessionRepository(theDbContext);
+            theUserRepository = new UsersRepository(theDbContext);
+
+            productManager = new ProductManager(theProductRepository, thePharmacyRepository, theSessionRepository, theUserRepository);
+            productController = new ProductController(productManager);
            
-            // if (false) { } //
-            // create an http client
-            var client = new HttpClient();
-            // let's post
-            var response = await client.SendAsync(request).ConfigureAwait(false);
 
+        }
 
+        [Given(@"I am an authorized employee deleting a product")]
+        public void GivenIAmAnAuthorizedEmployeeDeletingAProduct()
+        {
+         
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["Authorization"] = "E9E0E1E9-3812-4EB5-949E-AE92AC931401";
+
+            productController.ControllerContext = new ControllerContext()
+            {
+                HttpContext = httpContext,
+            };
+        }
+
+        [When(@"I choose the product with code ""([^""]*)"" to be deleted")]
+        public void WhenIChooseTheProductWithCodeToBeDeleted(string code)
+        {
+
+            //  Product product = theProductRepository.GetOneByExpression(p => p.Code == code);
+            _productId = 13;// product.Id;
+
+        }
+
+        [Then(@"the response status code should be ""([^""]*)""")]
+        public void ThenTheResponseStatusCodeShouldBe(string codeResponse)
+        {
+            result = productController.Delete(_productId);
+            var response = result as ObjectResult;
+            int responseCode = response.StatusCode.Value;
+            Assert.AreEqual(responseCode, int.Parse(codeResponse));
+        }
+
+        [AfterScenario]
+        public void Teardown()
+        {
             try
             {
-                context.Set(response.StatusCode, "ResponseStatusCode");
-                context.Set(response.Content, "ReponseMessage");
+                // Dispose of the DbContext and other disposable resources here
+                theDbContext?.Dispose();
+            }
+            catch (Exception ex)
+            {
+                // Log or handle any exceptions that occur during disposal
+                Console.WriteLine($"Error occurred during teardown: {ex.Message}");
             }
             finally
             {
-                //move along
+                // Ensure that theDbContext is set to null after disposal
+                theDbContext = null;
             }
         }
-
-
-        [Then(@"recibo una respuesta del delete con el codigo ""([^""]*)""")]
-        public void ThenReciboUnaRespuestaDelDeleteConElCodigo(int statusCode)
-        {
-            Assert.AreEqual(statusCode, (int)context.Get<HttpStatusCode>("ResponseStatusCode"));
-        }
-
     }
 }
