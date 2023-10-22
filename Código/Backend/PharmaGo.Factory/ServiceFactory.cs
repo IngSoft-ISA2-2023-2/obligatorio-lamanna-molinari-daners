@@ -42,6 +42,7 @@ namespace PharmaGo.Factory
             serviceCollection.AddScoped<IRepository<Presentation>, PresentationRepository>();
             serviceCollection.AddScoped<IRepository<Drug>, DrugRepository>();
             serviceCollection.AddScoped<IRepository<PurchaseDetail>, PurchasesDetailRepository>();
+            serviceCollection.AddScoped<IRepository<PurchaseDetailProduct> , PurchasesDetailProductRepository>();
             serviceCollection.AddScoped<IRepository<Role>, RoleRepository>();
             serviceCollection.AddScoped<IRepository<Product>, ProductRepository>();
 

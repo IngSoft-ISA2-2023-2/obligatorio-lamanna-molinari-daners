@@ -129,30 +129,30 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product deletion: 12345")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product deletion: 12370")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DeleteProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("deleteProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "12345")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeProduct", "12345")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "12370")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeProduct", "12370")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "200")]
-        public void SuccessfulProductDeletion_12345()
+        public void SuccessfulProductDeletion_12370()
         {
 #line 8
-this.SuccessfulProductDeletion("12345", "200", ((string[])(null)));
+this.SuccessfulProductDeletion("12370", "200", ((string[])(null)));
 #line hidden
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product deletion: 12346")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Successful product deletion: 12371")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "DeleteProduct")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("deleteProduct")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "12346")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeProduct", "12346")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "12371")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeProduct", "12371")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:codeResponse", "200")]
-        public void SuccessfulProductDeletion_12346()
+        public void SuccessfulProductDeletion_12371()
         {
 #line 8
-this.SuccessfulProductDeletion("12346", "200", ((string[])(null)));
+this.SuccessfulProductDeletion("12371", "200", ((string[])(null)));
 #line hidden
         }
     }
