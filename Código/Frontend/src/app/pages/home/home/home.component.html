@@ -3,6 +3,7 @@
   [search]="true" [ngStyle]="{ width: '100%' }"> 
 </app-custom-header>
   <c-header-divider></c-header-divider>
+  <h1>Medicines</h1>
   <c-container>
     <c-row>
       <c-col>
@@ -25,6 +26,39 @@
               </p>
               <div [ngStyle]="{ 'text-align': 'end' }">
               <button cButton color="primary" [routerLink]="['/home/detail', drug.id]">
+                View Details
+                <svg cIcon name="cil-plus"></svg>
+              </button>
+            </div>
+            </c-card-body>
+          </c-row>
+        </c-card>
+      </c-col>
+    </c-row>
+  </c-container>
+<h1>Products</h1>
+  <c-container>
+    <c-row>
+      <c-col>
+        <c-card 
+        [cBorder]="{top: {color: 'info', width: 3}}" 
+        class="mb-3" 
+        *ngFor="let product of products">
+          <c-row class="g-0">
+            <c-col [md]="4">
+              <img [cCardImg] src="assets/img/not_found.png" />
+            </c-col>
+            <c-card-body cCol [md]="8">
+              <h4 cCardTitle>{{ product.name }}</h4>
+              <h5 class="card-subtitle mb-2 text-muted"> 
+                {{ product.pharmacy.name }}
+              </h5>
+              <p cCardText> 
+                <b>Description:</b> {{ product.description }} <br>
+                <b>Price:</b> {{ product.price | currency}}
+              </p>
+              <div [ngStyle]="{ 'text-align': 'end' }">
+              <button cButton color="primary" [routerLink]="['/home/detail', product.id]">
                 View Details
                 <svg cIcon name="cil-plus"></svg>
               </button>
