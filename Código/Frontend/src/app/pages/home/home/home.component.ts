@@ -61,13 +61,13 @@ export class HomeComponent implements OnInit {
       this.cart = [];
       this.storageManager.saveData('cart', JSON.stringify(this.cart));
     }
-
+/*
     this.cartProduct = JSON.parse(this.storageManager.getData('cartProduct'));
     if(!this.cartProduct)
     {
       this.cartProduct = [];
       this.storageManager.saveData('cartProduct', JSON.stringify(this.cartProduct));
-    }
+    }*/
     this.commonServiceProduct.updateHeaderData(this.cartProduct.length + this.cart.length);
   }
 }

@@ -98,7 +98,13 @@ namespace PharmaGo.BusinessLogic
 
         public Product GetById(int id)
         {
-            throw new NotImplementedException();
+            Product retrievedproduct = _productRepository.GetOneByExpression(d => d.Id == id);
+            if (retrievedproduct == null)
+            {
+                throw new ResourceNotFoundException("The Product does not exist.");
+            }
+
+            return retrievedproduct;
         }
 
         public Product Update(int id, Product updateProduct, string token)

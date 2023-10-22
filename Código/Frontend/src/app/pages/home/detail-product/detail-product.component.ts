@@ -2,27 +2,28 @@ import { Component, OnInit} from '@angular/core';
 import { cilCart, cilPlus, cilCompass } from '@coreui/icons';
 import { IconSetService } from '@coreui/icons-angular';
 import { ActivatedRoute } from '@angular/router';
-import { Drug } from 'src/app/interfaces/drug';
-import { DrugService } from '../../../services/drug.service';
 import { StorageManager } from '../../../utils/storage-manager';
 import { Router } from '@angular/router'; 
 import { CommonService } from '../../../services/CommonService';
 
+import { Product } from 'src/app/interfaces/product';
+import { ProductService } from 'src/app/services/product.service';
+
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css'],
+  selector: 'app-detail-product',
+  templateUrl: './detail-product.component.html',
+  styleUrls: ['./detail-product.component.css']
 })
-export class DetailComponent implements OnInit {
-  drug: Drug | undefined;
+export class DetailProductComponent implements OnInit {
+  product: Product | undefined;
   quantity: number = 1;
   cart: any[] = [];
-  cartDrug: any[] = [];
+  cartProduct: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     public iconSet: IconSetService,
-    private drugService: DrugService,
+    private productService: ProductService,
     private storageManager: StorageManager,
     private router: Router,
     private commonService: CommonService
@@ -31,17 +32,17 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDrug();
+    this.getProduct();
     this.storageManager.saveData('total', JSON.stringify(0));
   }
 
-  getDrug(): void {
+  getProduct(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.drugService.getDrug(id).subscribe((drug) => (this.drug = drug));
+    this.productService.getProduct(id).subscribe((product) => (this.product = product));
   }
 
-  addToCart(drug: Drug) {
-    if (drug) {
+  addToCart(product: Product) {
+    if (product) {
       this.cart = JSON.parse(this.storageManager.getData('cart'));
       if (!this.cart) {
         this.cart = [];
@@ -50,45 +51,46 @@ export class DetailComponent implements OnInit {
       
       let exist: boolean = false;
       for (let item of this.cart) {
-        if (item.code === drug.code && item.id === drug.id){
+        if (item.code === product.code && item.id === product.id){
           item.quantity += this.quantity;
           exist = true;
           break;
         }
       }
       if (!exist){
-        drug.quantity = this.quantity;
-        this.cart.push(drug);
+        product.quantity = this.quantity;
+        this.cart.push(product);
       }
       this.storageManager.saveData('cart', JSON.stringify(this.cart));
     }
-    this.addToDrugCart(drug);
+    this.addToCartProduct(product);
     this.updateHeader(this.cart.length);
     this.router.navigate(['/home/cart']);
   }
-  addToDrugCart(drug: Drug) {
-    if (drug) {
-      this.cartDrug = JSON.parse(this.storageManager.getData('cartDrug'));
-      if (!this.cartDrug) {
-        this.cartDrug = [];
-        this.storageManager.saveData('cartDrug', JSON.stringify(this.cartDrug));
+  addToCartProduct(product: Product) {
+    if (product) {
+      this.cartProduct = JSON.parse(this.storageManager.getData('cartProduct'));
+      if (!this.cartProduct) {
+        this.cartProduct = [];
+        this.storageManager.saveData('cartProduct', JSON.stringify(this.cartProduct));
       }
       
       let exist: boolean = false;
-      for (let item of this.cartDrug) {
-        if (item.code === drug.code && item.id === drug.id){
+      for (let item of this.cartProduct) {
+        if (item.code === product.code && item.id === product.id){
           item.quantity += this.quantity;
           exist = true;
           break;
         }
       }
       if (!exist){
-        drug.quantity = this.quantity;
-        this.cartDrug.push(drug);
+        product.quantity = this.quantity;
+        this.cartProduct.push(product);
       }
-      this.storageManager.saveData('cartDrug', JSON.stringify(this.cartDrug));
+      this.storageManager.saveData('cartProduct', JSON.stringify(this.cartProduct));
     }
-    this.updateHeader(this.cartDrug.length);
+    console.log(this.storageManager.getData('cartProduct'));
+    this.updateHeader(this.cartProduct.length);
     this.router.navigate(['/home/cart']);
   }
 

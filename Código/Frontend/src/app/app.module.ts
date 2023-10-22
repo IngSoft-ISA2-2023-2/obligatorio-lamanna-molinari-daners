@@ -80,6 +80,7 @@ import { InvitationComponent } from './pages/owner/invitation/invitation.compone
 import { StockRequestOwnerComponent } from './pages/owner/stock-request-owner/stock-request-owner.component';
 import { DeleteProductComponent } from './pages/employee/delete-product/delete-product.component';
 import { UpdateProductComponent } from './pages/employee/update-product/update-product.component';
+import { DetailProductComponent } from './pages/home/detail-product/detail-product.component';
 
 
 @NgModule({
@@ -123,6 +124,7 @@ import { UpdateProductComponent } from './pages/employee/update-product/update-p
     StockRequestOwnerComponent,
     DeleteProductComponent,
     UpdateProductComponent,
+    DetailProductComponent,
   
     
 

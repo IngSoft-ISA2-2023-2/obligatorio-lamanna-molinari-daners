@@ -58,7 +58,7 @@
                 <b>Price:</b> {{ product.price | currency}}
               </p>
               <div [ngStyle]="{ 'text-align': 'end' }">
-              <button cButton color="primary" [routerLink]="['/home/detail', product.id]">
+              <button cButton color="primary" [routerLink]="['/home/detail-product', product.id]">
                 View Details
                 <svg cIcon name="cil-plus"></svg>
               </button>
