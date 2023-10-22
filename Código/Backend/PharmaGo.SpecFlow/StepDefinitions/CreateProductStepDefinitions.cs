@@ -1,7 +1,15 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Evaluation;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PharmaGo.BusinessLogic;
+using PharmaGo.DataAccess;
+using PharmaGo.DataAccess.Repositories;
 using PharmaGo.Domain.Entities;
+using PharmaGo.IDataAccess;
+using PharmaGo.WebApi.Controllers;
+using PharmaGo.WebApi.Models.In;
 using SpecFlow.Internal.Json;
 using System;
 using System.Diagnostics;
@@ -14,80 +22,103 @@ namespace PharmaGo.SpecFlow.StepDefinitions
     [Binding]
     public class CreateProductStepDefinitions
     {
-        private readonly Product _product = new Product();
-        private readonly ScenarioContext context;
+        private PharmacyGoDbContext theDbContext;
+        private IRepository<Product> theProductRepository;
+        private IRepository<Pharmacy> thePharmacyRepository;
+        private IRepository<Session> theSessionRepository;
+        private IRepository<User> theUserRepository;
 
-        public CreateProductStepDefinitions(ScenarioContext context)
+        private ProductManager productManager;
+        private ProductController productController;
+        private ProductModel productModel;
+
+        private IActionResult result;
+
+        [BeforeScenario]
+        public void Setup()
         {
-            this.context = context;
+            var connectionString = "Server=DESKTOP-O360J65\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True"; //agregar connection string a db
+            var optionsBuilder = new DbContextOptionsBuilder<PharmacyGoDbContext>();
+            optionsBuilder.UseSqlServer(connectionString);
+
+            theDbContext = new PharmacyGoDbContext(optionsBuilder.Options);
+
+            theProductRepository = new ProductRepository(theDbContext);
+            thePharmacyRepository = new PharmacyRepository(theDbContext);
+            theSessionRepository = new SessionRepository(theDbContext);
+            theUserRepository = new UsersRepository(theDbContext);
+
+            productManager = new ProductManager(theProductRepository, thePharmacyRepository, theSessionRepository, theUserRepository);
+            productController = new ProductController(productManager);
+            productModel = new ProductModel();
+
         }
 
-        [Given(@"The name ""([^""]*)""")]
-        public void GivenTheName(string name)
+        [Given(@"I am an authorized employee")]
+        public void GivenIAmAnAuthorizedEmployee()
         {
-            _product.Name = name;
-        }
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["Authorization"] = "E9E0E1E9-3812-4EB5-949E-AE92AC931401";
 
-        [Given(@"la descripcion ""([^""]*)""")]
-        public void GivenLaDescripcion(string descripcion)
-        {
-            _product.Description = descripcion;
-        }
-
-
-        [Given(@"el codigo ""([^""]*)""")]
-        public void GivenElCodigo(string code)
-        {
-            _product.Code = code;
-        }
-
-        [Given(@"el precio ""([^""]*)""")]
-        public void GivenElPrecio(int price)
-        {
-            _product.Price = price;
-        }
-
-        [When(@"Un product es creado por el empleado con el token ""([^""]*)"" mediante el ""([^""]*)"" con el endpoint")]
-        public async Task WhenUnProductEsCreadoPorElEmpleadoConElTokenMedianteElConElEndpoint(string token, string product)
-        {
-
-        string requestBody = JsonConvert.SerializeObject(new { nombre = _product.Name, descripcion = _product.Description, codigo = _product.Code, precio = _product.Price, pharmacyName = "Farmacia 1234" });
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"http://localhost:41123/api/product")
+            productController.ControllerContext = new ControllerContext()
             {
-                Content = new StringContent(requestBody)
-                {
-                    Headers =
-                        {
-                          ContentType = new MediaTypeHeaderValue("application/json"),
-                          
-                        }
-                },
+                HttpContext = httpContext,
             };
+        }
 
-            request.Headers.Authorization = new AuthenticationHeaderValue(token);
 
+        [When(@"I add a new product with the name ""([^""]*)""")]
+        public void WhenIAddANewProductWithTheName(string name)
+        {
+            productModel.Name = name;
+        }
 
-            var client = new HttpClient();
-          
-            //Employee1
-            var response = await client.SendAsync(request).ConfigureAwait(false);
+        [When(@"the description ""([^""]*)""")]
+        public void WhenTheDescription(string description)
+        {
+            productModel.Description = description;
+        }
 
-           
+        [When(@"the code ""([^""]*)""")]
+        public void WhenTheCode(string code)
+        {
+            productModel.Code = code;
+        }
+
+        [When(@"the price ""([^""]*)""")]
+        public void WhenThePrice(string price)
+        {
+            productModel.Price = decimal.Parse(price);
+        }
+
+        [Then(@"the response status should be ""([^""]*)""")]
+        public void ThenTheResponseStatusShouldBeAnd(string statusCode)
+        {
+        
+            result = productController.Create(productModel);
+            var response = result as ObjectResult;
+            int responseCode = response.StatusCode.Value;
+            Assert.AreEqual(responseCode, int.Parse(statusCode));
+        }
+
+        [Then(@"the response message should be ""([^""]*)""")]
+        public void ThenTheResponseMessageShouldBe(string message)
+        {
             try
             {
-                context.Set(response.StatusCode, "ResponseStatusCode");
+                result = productController.Create(productModel);
+
+                var response = result as ObjectResult;
                 
-            } finally
+            }catch(Exception e)
             {
-                //move along
+                Assert.AreEqual(message, e.Message);
             }
+           
         }
 
-        [Then(@"recibo una respuesta con el codigo ""([^""]*)""")]
-        public void ThenReciboUnaRespuestaConElCodigoYElMensaje(int statusCode)
-        {
-            Assert.AreEqual(statusCode, (int)context.Get<HttpStatusCode>("ResponseStatusCode"));
 
-        }
+
+
     }
 }

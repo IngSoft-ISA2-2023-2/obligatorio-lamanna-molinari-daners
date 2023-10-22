@@ -44,12 +44,12 @@ namespace PharmaGo.BusinessLogic
             Pharmacy pharmacyofProduct = _pharmacyRepository.GetOneByExpression(p => p.Name == user.Pharmacy.Name);
             if (pharmacyofProduct == null)
             {
-                throw new ResourceNotFoundException("The pharmacy of the drug does not exist.");
+                throw new ResourceNotFoundException("The pharmacy of the product does not exist.");
             }
 
             if (_productRepository.Exists(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name))
             {
-                throw new InvalidResourceException("The drug already exists in that pharmacy.");
+                throw new InvalidResourceException("The product already exists in that pharmacy.");
             }
             
             product.Pharmacy.Id = pharmacyofProduct.Id;

@@ -16,11 +16,11 @@ namespace PharmaGo.Domain.Entities
         {
             if (string.IsNullOrEmpty(Code) || string.IsNullOrEmpty(Name) || Price <= 0 || string.IsNullOrEmpty(Description))
             {
-                throw new InvalidResourceException("The Drug was not correctly created.");
+                throw new InvalidResourceException("The Product was not correctly created.");
             }
             if (Name.Length > 30 || Description.Length > 70 || Code.Length != 5)
             {
-                throw new InvalidResourceException("The Drug format is incorrect");
+                throw new InvalidResourceException("The Product format is incorrect");
             }
         }
     }
