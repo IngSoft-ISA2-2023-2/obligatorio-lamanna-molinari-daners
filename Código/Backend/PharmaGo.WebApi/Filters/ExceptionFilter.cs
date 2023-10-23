@@ -18,11 +18,11 @@ public class ExceptionFilter : IExceptionFilter
         }
         catch (InvalidResourceException e)
         {
-            context.Result = new JsonResult(new { Message = e.Message }) { StatusCode = 400 };
+            context.Result = new JsonResult(new { Message = e.Message }) { StatusCode = 455 };
         }
         catch (FormatException e)
         {
-            context.Result = new JsonResult(new { Message = "Invalid token format" }){ StatusCode = 400 };
+            context.Result = new JsonResult(new { Message = "Invalid token format" }){ StatusCode = 456 };
         }
         catch (Exception e)
         {

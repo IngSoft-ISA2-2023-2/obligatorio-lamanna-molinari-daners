@@ -12,7 +12,7 @@ import { CommonService } from '../../../services/CommonService';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cart: Drug[] = [];
+  cart: any[] = [];
   total: number = 0;
 
   constructor(

@@ -77,6 +77,20 @@
                     <b>{{ item.status }}</b>
                   </td>
                 </tr>
+                <tr
+                  *ngFor="
+                    let item of purchase.products;
+                    let indexOfelement = index">
+                  <td>{{ item.code }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.price  | currency}}</td>
+                  <td>{{ (item.price * item.quantity) | currency}}</td>
+                  <td>{{ item.pharmacyName }}</td>
+                  <td [ngStyle]="{ color: getColor(item.status) }">
+                    <b>{{ item.status }}</b>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </c-row>

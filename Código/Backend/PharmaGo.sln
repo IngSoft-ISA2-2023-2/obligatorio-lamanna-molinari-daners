@@ -25,9 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmaGo.Factory", "PharmaG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmaGo.WebApi", "PharmaGo.WebApi\PharmaGo.WebApi.csproj", "{64C4E951-58D5-4E8F-8F6F-E28491888604}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportationModel", "ExportationModel\ExportationModel.csproj", "{D58D10F6-719B-4609-9AD7-764047891C5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExportationModel", "ExportationModel\ExportationModel.csproj", "{D58D10F6-719B-4609-9AD7-764047891C5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSONExporter", "JSONExporter\JSONExporter.csproj", "{FADD2A7B-537F-4142-9028-10EF0967DA46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JSONExporter", "JSONExporter\JSONExporter.csproj", "{FADD2A7B-537F-4142-9028-10EF0967DA46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmaGo.SpecFlow", "PharmaGo.SpecFlow\PharmaGo.SpecFlow.csproj", "{9BDA8262-D8F0-4E56-B683-97C56D562373}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{FADD2A7B-537F-4142-9028-10EF0967DA46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FADD2A7B-537F-4142-9028-10EF0967DA46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FADD2A7B-537F-4142-9028-10EF0967DA46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BDA8262-D8F0-4E56-B683-97C56D562373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BDA8262-D8F0-4E56-B683-97C56D562373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BDA8262-D8F0-4E56-B683-97C56D562373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BDA8262-D8F0-4E56-B683-97C56D562373}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
