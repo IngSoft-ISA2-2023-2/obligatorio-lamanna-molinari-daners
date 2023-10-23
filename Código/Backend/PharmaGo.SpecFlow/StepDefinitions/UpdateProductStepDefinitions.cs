@@ -33,7 +33,7 @@ namespace PharmaGo.SpecFlow.StepDefinitions
         [BeforeScenario]
         public void Setup()
         {
-            var connectionString = "Server=DESKTOP-O360J65\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True"; //agregar connection string a db
+            var connectionString = "Server=.\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True"; //agregar connection string a db
             var optionsBuilder = new DbContextOptionsBuilder<PharmacyGoDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 

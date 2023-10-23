@@ -1,5 +1,6 @@
 ﻿using PharmaGo.Domain.Entities;
 using PharmaGo.WebApi.Models.In;
+using static PharmaGo.WebApi.Models.In.PurchaseModelRequest;
 
 namespace PharmaGo.WebApi.Converters
 {
@@ -13,6 +14,7 @@ namespace PharmaGo.WebApi.Converters
             purchase.PurchaseDate = model.PurchaseDate;
             purchase.BuyerEmail = model.BuyerEmail;
             purchase.details = new List<PurchaseDetail>();
+            purchase.products = new List<PurchaseDetailProduct>();
             foreach (var detail in model.Details)
             {
                 purchase.details
@@ -26,7 +28,15 @@ namespace PharmaGo.WebApi.Converters
                         }
                     });
             }
-
+            foreach (var purchaseDetailProduct in model.DetailsProducts)
+            {
+                purchase.products.Add(new PurchaseDetailProduct
+                {
+                    Pharmacy = new Pharmacy { Id = purchaseDetailProduct.PharmacyId },
+                    Quantity = purchaseDetailProduct.Quantity,
+                    Product = new Product { Code = purchaseDetailProduct.Code}
+                });
+            }
             return purchase;
         }
 

@@ -24,8 +24,11 @@ namespace PharmaGo.Test.BusinessLogic.Test
         private Pharmacy pharmacy;
         private Pharmacy pharmacy2;
         private ICollection<PurchaseDetail> purchaseDetail;
+        private ICollection<PurchaseDetailProduct> purchaseDetailProducts;
         private Drug drug1;
         private Drug drug2;
+        private Product product1;
+        private Product product2;
         private UnitMeasure unitMeasure1;
         private UnitMeasure unitMeasure2;
         private Presentation presentation1;
@@ -54,13 +57,21 @@ namespace PharmaGo.Test.BusinessLogic.Test
 
             drug1 = new Drug { Id = 1, Deleted = false, Code = "XF324", Name = "Aspirina", Prescription = false, Price = 100, Stock = 50, Quantity = 10, UnitMeasure = unitMeasure1, Presentation = presentation1, Symptom = "afecciones bronquiales que cursan con tos y secreciones" };
             drug2 = new Drug { Id = 2, Deleted = false, Code = "RS546", Name = "Abrilar", Prescription = false, Price = 250, Stock = 50, Quantity = 20, UnitMeasure = unitMeasure2, Presentation = presentation2, Symptom = "acción analgésica, alivio de los dolores ocasionales leves o\r\nmoderados, como dolores de cabeza, musculares, de espalda.\r\nPresentación: comprimidos" };
+            
+            product1 = new Product { Id = 1, Name = "Test product", Pharmacy = pharmacy, Price = new decimal(100), Code = "TEST1", Deleted = false, Description = "a" };
+            product2 = new Product { Id = 2, Name = "Test product 2", Pharmacy = pharmacy2, Price = new decimal(50), Code = "TEST2", Deleted = false, Description = "aa" };
 
-            pharmacy = new Pharmacy { Id = 1, Name = "Farmacia 1", Address = "Av. Italia 12345", Users = new List<User>(), Drugs = new List<Drug> { drug1 } };
-            pharmacy2 = new Pharmacy { Id = 2, Name = "Farmacia 2", Address = "Av. Italia 22222", Users = new List<User>(), Drugs = new List<Drug> { drug2 } };
+            pharmacy = new Pharmacy { Id = 1, Name = "Farmacia 1", Address = "Av. Italia 12345", Users = new List<User>(), Drugs = new List<Drug> { drug1 }, Products = new List<Product> {product1} };
+            pharmacy2 = new Pharmacy { Id = 2, Name = "Farmacia 2", Address = "Av. Italia 22222", Users = new List<User>(), Drugs = new List<Drug> { drug2 }, Products = new List<Product> { product2 } };
 
             purchaseDetail = new List<PurchaseDetail> {
                 new PurchaseDetail{Id = 1, Quantity = 2, Price = new decimal(100), Drug =  drug1, Pharmacy = pharmacy, Status = "Pending"},
                 new PurchaseDetail{Id = 2, Quantity = 1, Price = new decimal(250), Drug = drug2, Pharmacy = pharmacy2, Status = "Approved" }
+            };
+
+            purchaseDetailProducts = new List<PurchaseDetailProduct>() {
+                new PurchaseDetailProduct{ Id = 1, Quantity= 2, Price = new decimal(100), Pharmacy = pharmacy, Status = "Pending", Product = product1},
+                new PurchaseDetailProduct{ Id = 2, Quantity= 1, Price = new decimal(250), Pharmacy = pharmacy2, Status= "Approved", Product = product2}
             };
 
             purchase = new Purchase
@@ -68,8 +79,9 @@ namespace PharmaGo.Test.BusinessLogic.Test
                 Id = 1,
                 BuyerEmail = "roberto.perez@gmail.com",
                 PurchaseDate = new DateTime(2022, 09, 19, 14, 34, 44),
-                TotalAmount = new decimal(450),
-                details = purchaseDetail
+                TotalAmount = new decimal(900),
+                details = purchaseDetail,
+                products = purchaseDetailProducts
             };
 
             purchase_2 = new Purchase
@@ -77,8 +89,9 @@ namespace PharmaGo.Test.BusinessLogic.Test
                 Id = 2,
                 BuyerEmail = "carlos.perez@gmail.com",
                 PurchaseDate = new DateTime(2022, 10, 19, 14, 34, 44),
-                TotalAmount = new decimal(450),
-                details = purchaseDetail
+                TotalAmount = new decimal(900),
+                details = purchaseDetail,
+                products = purchaseDetailProducts
             };
             session = new Session { Id = 1, Token = new Guid(token), UserId = 1 };
             user = new User { Id = 1, Email = "fernando@gmail.com", Password = "Asdfer234..", Pharmacy = pharmacy};
@@ -93,6 +106,7 @@ namespace PharmaGo.Test.BusinessLogic.Test
             _userRespository.VerifyAll();
             _sessionRespository.VerifyAll();
             _purchaseDetailRespository.VerifyAll();
+            _purchaseDetailProductRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -107,6 +121,8 @@ namespace PharmaGo.Test.BusinessLogic.Test
             int pharmacyId = 1;
             int pharmacyId2 = 2;
 
+            _pharmacyRespository.Setup(y => y.GetOneByExpression(x => x.Id == pharmacyId)).Returns(pharmacy);
+            _pharmacyRespository.Setup(y => y.GetOneByExpression(x => x.Id == pharmacyId2)).Returns(pharmacy2);
             _pharmacyRespository.Setup(y => y.GetOneByExpression(x => x.Id == pharmacyId)).Returns(pharmacy);
             _pharmacyRespository.Setup(y => y.GetOneByExpression(x => x.Id == pharmacyId2)).Returns(pharmacy2);
             _purchaseRespository.Setup(x => x.InsertOne(purchase));

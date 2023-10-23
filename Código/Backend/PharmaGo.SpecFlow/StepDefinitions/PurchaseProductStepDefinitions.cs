@@ -36,12 +36,13 @@ namespace PharmaGo.SpecFlow.StepDefinitions
 
         private IActionResult result;
         private PurchaseDetailProductModelRequest productReq;
+        private PurchaseDetailModelRequest detailsReq;
         private PurchaseModelRequest request;
 
         [BeforeScenario]
         public void Setup()
         {
-            var connectionString = "Server=DESKTOP-O360J65\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True"; //agregar connection string a db
+            var connectionString = "Server=.\\SQLEXPRESS;Database=PharmaGoDb;Trusted_Connection=True; MultipleActiveResultSets=True"; //agregar connection string a db
             var optionsBuilder = new DbContextOptionsBuilder<PharmacyGoDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
@@ -76,15 +77,22 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             {
                 PharmacyId = 1,
                 Code = "12345",
-                Quantity = 1,
+                Quantity = 1
+            };
+
+            detailsReq = new PurchaseDetailModelRequest()
+            {
+                PharmacyId = 1,
+                Code = "TEST", //name of test drug in the database
+                Quantity = 1
             };
 
             request = new PurchaseModelRequest()
             {
                 BuyerEmail = "abcde@gmail.com",
                 PurchaseDate = DateTime.Now,
-                Details = new List<PurchaseDetailModelRequest>(),
-                Products = new List<PurchaseDetailProductModelRequest>(){ productReq },
+                Details = new List<PurchaseDetailModelRequest>() { detailsReq },
+                DetailsProducts = new List<PurchaseDetailProductModelRequest>(){ productReq }
             };
         }
 
@@ -94,7 +102,7 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             result = purchasesController.CreatePurchase(request);
             var response = result as ObjectResult;
             int responseCode = response.StatusCode.Value;
-            Assert.AreEqual(responseCode, int.Parse(statusoCode));
+            Assert.AreEqual(responseCode, int.Parse(statusCode));
         }
 
     }

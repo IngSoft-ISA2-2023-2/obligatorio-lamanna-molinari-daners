@@ -49,10 +49,22 @@ export interface PurchaseResponse {
   purchaseDate: string;
   trackingCode: string;
   totalAmount: number;
-  details: PurchaseDetailModelResponse[]
+  details: PurchaseDetailModelResponse[];
+  products: PurchaseDetailProductModelResponse[];
 }
 
 export interface PurchaseDetailModelResponse {
+  id: number;
+  code: string;
+  name: string;
+  quantity: number;
+  price: number;
+  pharmacyId: number;
+  pharmacyName: string;
+  status: string;
+}
+
+export interface PurchaseDetailProductModelResponse {
   id: number;
   code: string;
   name: string;
