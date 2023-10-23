@@ -10,6 +10,7 @@ using PharmaGo.WebApi.Models.In;
 using System;
 using TechTalk.SpecFlow;
 using static PharmaGo.WebApi.Models.In.PurchaseModelRequest;
+using Microsoft.AspNetCore.Http;
 
 namespace PharmaGo.SpecFlow.StepDefinitions
 {
@@ -51,17 +52,29 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             theProductRepository = new ProductRepository(theDbContext);
             thePharmacyRepository = new PharmacyRepository(theDbContext);
             theSessionRepository = new SessionRepository(theDbContext);
+
             drugRepository = new DrugRepository(theDbContext);
             purchaseDetailRepository = new PurchasesDetailRepository(theDbContext);
             purchaseDetailProductRepository = new PurchasesDetailProductRepository(theDbContext);
             userRepository = new UsersRepository(theDbContext);
 
+            productManager = new ProductManager(theProductRepository, thePharmacyRepository, theSessionRepository, userRepository);
             productController = new ProductController(productManager);
-            productModel = new ProductModel();
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["Authorization"] = "E9E0E1E9-3812-4EB5-949E-AE92AC931401";
+            productController.ControllerContext = new ControllerContext()
+            {
+                HttpContext = httpContext,
+            };
+
+            productModel = new ProductModel() { Name = "Test Product", Code="TESTP", Price = 101, Description = "Product only used in testing"};
+            productModel.PharmacyName = thePharmacyRepository.GetOneByExpression(p => p.Id == 1).Name;
+            var response = productController.Create(productModel);
 
             purchaseRepository = new PurchasesRepository(theDbContext);
             purchasesManager = new PurchasesManager(purchaseRepository, thePharmacyRepository, drugRepository, purchaseDetailRepository, purchaseDetailProductRepository, theSessionRepository, userRepository);
             purchasesController = new PurchasesController(purchasesManager);
+
         }
 
         [Given(@"I'm a client")]
@@ -76,7 +89,7 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             productReq = new PurchaseDetailProductModelRequest()
             {
                 PharmacyId = 1,
-                Code = "12345",
+                Code = "TESTP",
                 Quantity = 1
             };
 
@@ -105,5 +118,11 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             Assert.AreEqual(responseCode, int.Parse(statusCode));
         }
 
+        [AfterScenario]
+        public void Teardown()
+        {
+            Product p = theProductRepository.GetOneByExpression(p => p.Code == productModel.Code && p.Pharmacy.Name == productModel.PharmacyName);
+            if (p != null) { productController.Delete(p.Id); }
+        }
     }
 }

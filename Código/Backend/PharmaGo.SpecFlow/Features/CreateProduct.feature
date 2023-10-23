@@ -7,7 +7,7 @@ Para: Poder verlo en el sistema
 @productCreation
 
 Scenario: Successful product creation
-    Given I am an authorized employee
+    Given I am an authorized employee with "<token>"
     When I add a new product with the name "<name>" 
     And the description "<description>"
     And the code "<code>"
@@ -20,7 +20,7 @@ Examples:
     | nombre test 2                   | descripcion prueba 2                                                           | 12346  | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 |                                      
 
 Scenario: UnSuccessful product creation
-    Given I am an authorized employee
+    Given I am an authorized employee with "<token>"
     When I add a new product with the name "<name>" 
     And the description "<description>"
     And the code "<code>"
