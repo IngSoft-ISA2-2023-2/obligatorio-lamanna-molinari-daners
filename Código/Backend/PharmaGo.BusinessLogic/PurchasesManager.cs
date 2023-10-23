@@ -47,7 +47,7 @@ namespace PharmaGo.BusinessLogic
             if (string.IsNullOrEmpty(purchase.BuyerEmail) || !rgEmail.IsMatch(purchase.BuyerEmail))
                 throw new InvalidResourceException("Invalid Email");
 
-            if ((purchase.details == null || purchase.details.Count == 0 ||  purchase.products == null ||  purchase.products.Count == 0))
+            if ((purchase.details == null || purchase.details.Count == 0) && ( purchase.products == null ||  purchase.products.Count == 0))
                 throw new InvalidResourceException("The list of items can't be empty");
 
             if (purchase.PurchaseDate == DateTime.MinValue)

@@ -171,7 +171,7 @@ this.SuccessfulProductUpdate("new nombre test", "new descripcion prueba", "12444
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("productCreation")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "new nombre test 2")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "new nombre test 2")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "new descripcion prueba 2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:description", "descripcion")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "12445")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:price", "100")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:controller", "product")]
@@ -182,7 +182,7 @@ this.SuccessfulProductUpdate("new nombre test", "new descripcion prueba", "12444
         public void SuccessfulProductUpdate_NewNombreTest2()
         {
 #line 9
-this.SuccessfulProductUpdate("new nombre test 2", "new descripcion prueba 2", "12445", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "a", "12443", ((string[])(null)));
+this.SuccessfulProductUpdate("new nombre test 2", "descripcion", "12445", "100", "product", "200", "E9E0E1E9-3812-4EB5-949E-AE92AC931401", "a", "12443", ((string[])(null)));
 #line hidden
         }
         

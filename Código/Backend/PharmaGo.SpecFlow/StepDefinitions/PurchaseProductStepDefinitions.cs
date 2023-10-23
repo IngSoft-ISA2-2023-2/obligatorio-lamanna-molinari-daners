@@ -89,22 +89,19 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             productReq = new PurchaseDetailProductModelRequest()
             {
                 PharmacyId = 1,
+<<<<<<< HEAD
                 Code = "TESTP",
+=======
+                Code = "12605",
+>>>>>>> d7dee763d2d1091f3db768087b476b9f88dec912
                 Quantity = 1
             };
-
-            detailsReq = new PurchaseDetailModelRequest()
-            {
-                PharmacyId = 1,
-                Code = "TEST", //name of test drug in the database
-                Quantity = 1
-            };
-
+         
             request = new PurchaseModelRequest()
             {
                 BuyerEmail = "abcde@gmail.com",
                 PurchaseDate = DateTime.Now,
-                Details = new List<PurchaseDetailModelRequest>() { detailsReq },
+                Details = new List<PurchaseDetailModelRequest>(),
                 DetailsProducts = new List<PurchaseDetailProductModelRequest>(){ productReq }
             };
         }
