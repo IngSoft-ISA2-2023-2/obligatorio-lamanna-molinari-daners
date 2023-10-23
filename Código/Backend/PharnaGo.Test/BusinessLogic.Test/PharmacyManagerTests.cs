@@ -37,7 +37,8 @@ namespace PharmaGo.Test.BusinessLogic.Test
                 Name = "newPharmacy",
                 Address = "newAddress",
                 Users = new List<User>(),
-                Drugs = new List<Drug>()
+                Drugs = new List<Drug>(),
+                Products = new List<Product>()
             };
         }
 

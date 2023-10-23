@@ -10,6 +10,9 @@ namespace PharmaGo.WebApi.Models.Out
         public ICollection<UserBasicModel> Users { get; set; }
         public ICollection<DrugBasicModel> Drugs { get; set; }
 
+        public ICollection<ProductBasicModel> Products { get; set; }
+
+
 
         public PharmacyDetailModel(Pharmacy pharmacy)
         {
@@ -25,6 +28,11 @@ namespace PharmaGo.WebApi.Models.Out
             foreach (var drug in pharmacy.Drugs)
             {
                 Drugs.Add(new DrugBasicModel(drug));
+            }
+            Products = new List<ProductBasicModel>();
+            foreach (var p in pharmacy.Products)
+            {
+                Products.Add(new ProductBasicModel(p));
             }
         }
     }

@@ -28,6 +28,10 @@ import { PurchaseByDateComponent } from './pages/owner/purchase-by-date/purchase
 import { InvitationComponent } from './pages/owner/invitation/invitation.component';
 import { CreatePharmacyComponent } from './pages/admin/create-pharmacy/create-pharmacy.component';
 import { StockRequestOwnerComponent } from './pages/owner/stock-request-owner/stock-request-owner.component';
+import { CreateProductComponent } from './pages/employee/create-product/create-product.component';
+import { DeleteProductComponent } from './pages/employee/delete-product/delete-product.component';
+import { UpdateProductComponent } from './pages/employee/update-product/update-product.component';
+import { DetailProductComponent } from './pages/home/detail-product/detail-product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -35,6 +39,7 @@ const routes: Routes = [
   { path: 'home/cart', component: CartComponent },
   { path: 'home/cart/cho', component: ChoComponent },
   { path: 'home/detail/:id', component: DetailComponent },
+  { path: 'home/detail-product/:id', component: DetailProductComponent },
   { path: 'home/tracking', component: TrackingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -45,6 +50,9 @@ const routes: Routes = [
   { path: 'employee/stock-request', component: StockRequestComponent, canActivate: [AuthenticationGuard], data: {roles: ['Employee'] } },
   { path: 'employee/create-request', component: CreateRequestComponent, canActivate: [AuthenticationGuard], data: {roles: ['Employee'] } },
   { path: 'employee/export-drugs', component: ExportDrugsComponent, canActivate: [AuthenticationGuard], data: {roles: ['Employee'] } },
+  { path: 'employee/create-product', component: CreateProductComponent, canActivate: [AuthenticationGuard], data: {roles: ['Employee'] } },
+  { path: 'employee/delete-product', component: DeleteProductComponent, canActivate: [AuthenticationGuard], data: {roles: ['Employee'] } },
+  { path: 'employee/update-product', component: UpdateProductComponent, canActivate: [AuthenticationGuard], data: {roles: ['Employee'] }},
   { path: 'admin', component: AdminComponent, canActivate: [AuthenticationGuard], data: {roles: ['Administrator'] }},
   { path: 'admin/create-invitation', component: CreateInvitationComponent, canActivate: [AuthenticationGuard], data: {roles: ['Administrator'] }},
   { path: 'admin/list-invitation', component: ListInvitationComponent, canActivate: [AuthenticationGuard], data: {roles: ['Administrator'] }},

@@ -17,6 +17,7 @@ export class DetailComponent implements OnInit {
   drug: Drug | undefined;
   quantity: number = 1;
   cart: any[] = [];
+  cartDrug: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -61,7 +62,33 @@ export class DetailComponent implements OnInit {
       }
       this.storageManager.saveData('cart', JSON.stringify(this.cart));
     }
+    this.addToDrugCart(drug);
     this.updateHeader(this.cart.length);
+    this.router.navigate(['/home/cart']);
+  }
+  addToDrugCart(drug: Drug) {
+    if (drug) {
+      this.cartDrug = JSON.parse(this.storageManager.getData('cartDrug'));
+      if (!this.cartDrug) {
+        this.cartDrug = [];
+        this.storageManager.saveData('cartDrug', JSON.stringify(this.cartDrug));
+      }
+      
+      let exist: boolean = false;
+      for (let item of this.cartDrug) {
+        if (item.code === drug.code && item.id === drug.id){
+          item.quantity += this.quantity;
+          exist = true;
+          break;
+        }
+      }
+      if (!exist){
+        drug.quantity = this.quantity;
+        this.cartDrug.push(drug);
+      }
+      this.storageManager.saveData('cartDrug', JSON.stringify(this.cartDrug));
+    }
+    this.updateHeader(this.cartDrug.length);
     this.router.navigate(['/home/cart']);
   }
 

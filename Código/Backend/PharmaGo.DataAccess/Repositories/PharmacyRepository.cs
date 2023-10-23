@@ -15,7 +15,7 @@ namespace PharmaGo.DataAccess.Repositories
 
         public override Pharmacy GetOneByExpression(Expression<Func<Pharmacy, bool>> expression)
         {
-            return _context.Set<Pharmacy>().Include("Users").Include("Drugs").FirstOrDefault(expression);
+            return _context.Set<Pharmacy>().Include("Users").Include("Drugs").Include("Products").FirstOrDefault(expression);
         }
     }
 }
