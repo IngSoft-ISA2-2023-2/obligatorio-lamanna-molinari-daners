@@ -17,7 +17,7 @@ Scenario: Successful product update
 Examples: 
     | name              | description              | code  | price | controller | codeResponse | token                                | codeMessage | oldCode |
     | new nombre test   | new descripcion prueba   | 12444 | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | a           | 12442   |
-    | new nombre test 2 | new descripcion prueba 2 | 12445 | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | a           | 12443   |
+    | new nombre test 2 | descripcion              | 12445 | 100   | product    | 200          | E9E0E1E9-3812-4EB5-949E-AE92AC931401 | a           | 12443   |
   
 Scenario: UnSuccessful product update
     Given I am an authorized employee who selected the product with code "<oldCode>"
