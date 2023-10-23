@@ -61,7 +61,8 @@ namespace PharmaGo.Test.WebApi.Test
             {
                 BuyerEmail = "roberto.perez@gmail.com",
                 PurchaseDate = new DateTime(2022, 09, 19, 14, 34, 44),
-                Details = purchaseModelDetailRequest
+                Details = purchaseModelDetailRequest,
+                DetailsProducts = new List<PurchaseModelRequest.PurchaseDetailProductModelRequest>()
             };
 
             unitMeasure1 = new UnitMeasure { Id = 1, Deleted = false, Name = "ml" };
