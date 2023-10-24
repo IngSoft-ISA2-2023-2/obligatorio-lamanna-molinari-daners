@@ -38,7 +38,7 @@ jobs:
       
     
     - name: Install SpecFlow.Tools.MsBuild.Generation
-      run: dotnet tool install --global SpecFlow.Tools.MsBuild.Generation
+      run: dotnet tool install --global SpecFlow.Tools.MsBuild.Generation --version 3.9.74
 
     - name: Generate SpecFlow files
       run: dotnet msbuild /t:SpecFlowGenerateAll C:\Users\Administrador\Desktop\obligatorio-lamanna-molinari-daners\Código\Backend\PharmaGo.sln
