@@ -167,6 +167,7 @@ namespace PharmaGo.Test.BusinessLogic.Test
         {
             //Arrange
             purchase.details = new List<PurchaseDetail>();
+            purchase.products = new List<PurchaseDetailProduct>();
 
             //Act
            var response = _purchasesManager.CreatePurchase(purchase);
@@ -178,6 +179,7 @@ namespace PharmaGo.Test.BusinessLogic.Test
         {
             //Arrange
             purchase.details = null;
+            purchase.products = null;
 
             //Act
             var response = _purchasesManager.CreatePurchase(purchase);
