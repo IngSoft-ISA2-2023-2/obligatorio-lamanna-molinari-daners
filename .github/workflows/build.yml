@@ -37,11 +37,3 @@ jobs:
       run: dotnet test Código/Backend/PharnaGo.Test/PharmaGo.Test.csproj
       
     
-    - name: Install SpecFlow.Tools.MsBuild.Generation
-      run: dotnet tool install --global SpecFlow.Tools.MsBuild.Generation --version 3.9.74
-
-    - name: Generate SpecFlow files
-      run: dotnet msbuild /t:SpecFlowGenerateAll C:\Users\Administrador\Desktop\obligatorio-lamanna-molinari-daners\Código\Backend\PharmaGo.sln
-
-    - name: Run SpecFlow Tests
-      run: dotnet test C:\Users\Administrador\Desktop\obligatorio-lamanna-molinari-daners\Código\Backend\PharmaGo.SpecFlow\PharmaGo.SpecFlow.csproj
