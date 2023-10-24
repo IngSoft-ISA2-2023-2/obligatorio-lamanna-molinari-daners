@@ -39,13 +39,13 @@ namespace PharmaGo.WebApi.Controllers
         }
 
         [HttpPost]
-        [AuthorizationFilter(new string[] {nameof(RoleType.Employee)})]
+        [AuthorizationFilter(new string[] { nameof(RoleType.Employee) })]
         public IActionResult Create([FromBody] ProductModel productModel)
         {
             string token = HttpContext.Request.Headers["Authorization"];
             Product productCreated = _productManager.Create(productModel.ToEntity(), token);
-           ProductDetailModel drugResponse = new ProductDetailModel(productCreated);
-           return Ok(drugResponse);
+            ProductDetailModel drugResponse = new ProductDetailModel(productCreated);
+            return Ok(drugResponse);
         }
 
         [HttpDelete("{id}")]
@@ -61,7 +61,7 @@ namespace PharmaGo.WebApi.Controllers
         public IActionResult Update([FromRoute] int id, [FromBody] UpdateProductModel updatedProduct)
         {
             string token = HttpContext.Request.Headers["Authorization"];
-            Product product = _productManager.Update(id, updatedProduct.ToEntity(),token);
+            Product product = _productManager.Update(id, updatedProduct.ToEntity(), token);
             return Ok(new ProductDetailModel(product));
         }
     }
