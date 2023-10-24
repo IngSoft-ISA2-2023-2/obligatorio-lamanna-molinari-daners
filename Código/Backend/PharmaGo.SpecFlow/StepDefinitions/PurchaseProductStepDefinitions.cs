@@ -89,11 +89,7 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             productReq = new PurchaseDetailProductModelRequest()
             {
                 PharmacyId = 1,
-<<<<<<< HEAD
                 Code = "TESTP",
-=======
-                Code = "12605",
->>>>>>> d7dee763d2d1091f3db768087b476b9f88dec912
                 Quantity = 1
             };
          
