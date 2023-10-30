@@ -265,6 +265,13 @@
       "targets": [],
       "value": ""
     }, {
+      "id": "7cddc317-2ec4-4e2e-9230-96dacb062c92",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "974x1040",
+      "targets": [],
+      "value": ""
+    }, {
       "id": "67637cbd-f81e-4d93-8a16-33ccb073451e",
       "comment": "",
       "command": "click",
@@ -823,6 +830,124 @@
         ["xpath=//span[contains(.,'Product deleted. Success deleting product \"65432 - Product\"')]", "xpath:innerText"]
       ],
       "value": "Product deleted. Success deleting product \"65432 - Product\""
+    }]
+  }, {
+    "id": "8004f4bc-4b52-4704-885e-7f6519913d21",
+    "name": "Update Product",
+    "commands": [{
+      "id": "f7a1b09c-3444-48c2-a4da-b7cf3d55af71",
+      "comment": "",
+      "command": "open",
+      "target": "/home",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a16ad866-640d-4e14-8537-42ea8151a1a2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "974x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "76e1fcdc-543d-45c3-b1e5-2fc7fa88bc15",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Login",
+      "targets": [
+        ["linkText=Login", "linkText"],
+        ["css=.nav-item:nth-child(3) .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Login')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/login')]", "xpath:href"],
+        ["xpath=//c-nav-item[3]/button/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "73d3762c-a10c-43f8-aab3-8152192c510f",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@type='text']",
+      "targets": [
+        ["css=.mb-3 > .ng-untouched", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "employee1"
+    }, {
+      "id": "fe725ebd-029e-48c8-be5f-92f08cf06a2d",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@type='password']",
+      "targets": [
+        ["css=.ng-untouched:nth-child(2)", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//c-input-group[2]/input", "xpath:position"]
+      ],
+      "value": "Aqwertyu2."
+    }, {
+      "id": "bdd54acc-be81-4027-8638-8ed48e2e27ed",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//button[@type='button']",
+      "targets": [
+        ["css=.px-4", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "922ac955-7ac2-44db-8610-ab8fbabc8790",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//a[@routerlink='/employee/update-product']",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "98b2aa32-506e-4f35-8579-db09dd58bd84",
+      "comment": "",
+      "command": "select",
+      "target": "css=.form-select",
+      "targets": [
+        ["css=.form-select", "css:finder"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": "nombre test"
+    }, {
+      "id": "3ba00630-678f-4a79-a668-99cc1d580e3c",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@formcontrolname='price']",
+      "targets": [],
+      "value": "1234"
+    }, {
+      "id": "17097f95-5832-4872-b57d-59e8bfb4e8cc",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@formcontrolname='description']",
+      "targets": [],
+      "value": "Una nueva descripcion modificada"
+    }, {
+      "id": "257586cf-d5bd-44b4-950a-4a34240bad82",
+      "comment": "",
+      "command": "type",
+      "target": "xpath=//input[@formcontrolname='code']",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "29b4b616-2495-49ac-a717-9a2766fa281a",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=//*[text()[contains(., 'Update Invitation')]]",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "791c993c-3f71-4e57-973c-8e734e7bddc4",
+      "comment": "",
+      "command": "assertText",
+      "target": "xpath=//*[text()[contains(., 'Product updated.')]]",
+      "targets": [],
+      "value": "Product updated."
     }]
   }],
   "suites": [{
