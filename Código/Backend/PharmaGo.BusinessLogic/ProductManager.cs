@@ -48,7 +48,7 @@ namespace PharmaGo.BusinessLogic
                 throw new ResourceNotFoundException("The pharmacy of the product does not exist.");
             }
 
-            if (_productRepository.Exists(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name))
+            if (_productRepository.Exists(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name && d.Deleted == false))
             {
                 throw new InvalidResourceException("The product already exists in that pharmacy.");
             }
@@ -114,7 +114,7 @@ namespace PharmaGo.BusinessLogic
                 throw new ResourceNotFoundException("The updated product is invalid.");
             }
           
-            var productSaved = _productRepository.GetOneByExpression(d => d.Id == id);
+            var productSaved = _productRepository.GetOneByExpression(d => d.Id == id && d.Deleted == false);
             if (productSaved == null)
             {
                 throw new ResourceNotFoundException("The product to update does not exist.");
@@ -125,7 +125,7 @@ namespace PharmaGo.BusinessLogic
             var userId = session.UserId;
             User user = _userRepository.GetOneDetailByExpression(u => u.Id == userId);
 
-            if (_productRepository.Exists(d => d.Code == updateProduct.Code && d.Pharmacy.Name == user.Pharmacy.Name))
+            if (_productRepository.Exists(d => d.Code == updateProduct.Code && d.Pharmacy.Name == user.Pharmacy.Name && d.Deleted == false))
             {
                 throw new InvalidResourceException("A product with that code already exists in that pharmacy.");
             }
