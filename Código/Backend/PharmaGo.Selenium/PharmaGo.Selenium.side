@@ -303,7 +303,7 @@
       "id": "f54495b0-4d29-4ff8-8b47-0db526352da3",
       "comment": "",
       "command": "type",
-      "target": "css=.mb-3:nth-child(2) > .ng-untouched",
+      "target": "xpath=//input[@formcontrolname='code']",
       "targets": [
         ["css=.ng-dirty:nth-child(2)", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -311,21 +311,10 @@
       ],
       "value": "44467"
     }, {
-      "id": "b6d02377-d3bf-4477-af39-0469aa82a178",
-      "comment": "",
-      "command": "click",
-      "target": "css=.mb-3:nth-child(3) > .ng-untouched",
-      "targets": [
-        ["css=.mb-3:nth-child(3) > .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='text'])[2]", "xpath:attributes"],
-        ["xpath=//c-input-group[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
       "id": "f7caa0a6-d1f3-45b9-b3e9-99510f946b22",
       "comment": "",
       "command": "type",
-      "target": "css=.mb-3:nth-child(3) > .ng-untouched",
+      "target": "xpath=//input[@formcontrolname='name']",
       "targets": [
         ["css=.mb-3:nth-child(3) > .ng-untouched", "css:finder"],
         ["xpath=(//input[@type='text'])[2]", "xpath:attributes"],
@@ -333,21 +322,10 @@
       ],
       "value": "Producto"
     }, {
-      "id": "94c5d067-6a07-44d7-b4af-fb55236340b4",
-      "comment": "",
-      "command": "click",
-      "target": "css=.mb-3:nth-child(4) > .ng-untouched",
-      "targets": [
-        ["css=.mb-3:nth-child(4) > .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='text'])[3]", "xpath:attributes"],
-        ["xpath=//c-input-group[3]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
       "id": "870ada43-f3dd-437b-b2f7-aa32e40af207",
       "comment": "",
       "command": "type",
-      "target": "css=.mb-3:nth-child(4) > .ng-untouched",
+      "target": "xpath=//input[@formcontrolname='description']",
       "targets": [
         ["css=.mb-3:nth-child(4) > .ng-untouched", "css:finder"],
         ["xpath=(//input[@type='text'])[3]", "xpath:attributes"],
@@ -355,21 +333,10 @@
       ],
       "value": "Descripcion"
     }, {
-      "id": "63181c41-807c-42cc-ab79-d7eb9a00522d",
-      "comment": "",
-      "command": "click",
-      "target": "css=.mb-3:nth-child(5) > .ng-untouched",
-      "targets": [
-        ["css=.ng-untouched", "css:finder"],
-        ["xpath=//input[@type='input']", "xpath:attributes"],
-        ["xpath=//c-input-group[4]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
       "id": "587ec531-1e18-46a3-bdab-bba80b170b62",
       "comment": "",
       "command": "type",
-      "target": "css=.mb-3:nth-child(5) > .ng-untouched",
+      "target": "xpath=//input[@formcontrolname='price']",
       "targets": [
         ["css=.ng-untouched", "css:finder"],
         ["xpath=//input[@type='input']", "xpath:attributes"],
@@ -840,13 +807,13 @@
       "id": "43706047-efdc-4bdc-ae9b-6453dec5755a",
       "comment": "",
       "command": "assertText",
-      "target": "css=span:nth-child(1)",
+      "target": "xpath=//*[text()[contains(., 'Product deleted.')]]",
       "targets": [
         ["css=span:nth-child(1)", "css:finder"],
         ["xpath=//c-toast-body/span", "xpath:position"],
         ["xpath=//span[contains(.,'Product deleted. Success deleting product \"65432 - Product\"')]", "xpath:innerText"]
       ],
-      "value": "Product deleted. Success deleting product \"65432 - Product\""
+      "value": "Product deleted."
     }]
   }, {
     "id": "8004f4bc-4b52-4704-885e-7f6519913d21",
@@ -1001,7 +968,7 @@
       "id": "1152ffa0-a7ae-4662-b3fd-30d05d39417b",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -1188,7 +1155,7 @@
       "id": "6adecf06-a1de-4959-b50e-48b6d3c82a22",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -1375,7 +1342,7 @@
       "id": "c3df9add-ac56-4899-bdf5-01eeed9e0770",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -1562,7 +1529,7 @@
       "id": "31319acf-c500-4eba-bf5a-703534907837",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -1749,7 +1716,7 @@
       "id": "bcfddfe4-16ad-4380-9008-544510ec79cf",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -1936,7 +1903,7 @@
       "id": "78d8f02e-f7cf-40b2-a8cd-c8d97377097f",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -2123,7 +2090,7 @@
       "id": "a26d86ba-3138-4bb0-bc18-4ecdc98262cc",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -2310,7 +2277,7 @@
       "id": "afbb09cc-8964-4264-9b00-abf6396d56f5",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
@@ -3094,7 +3061,7 @@
       "id": "721fae21-18df-4482-8ae0-d770cf064eee",
       "comment": "",
       "command": "type",
-      "target": "css=.ng-dirty",
+      "target": "xpath=//input[@type='text']",
       "targets": [
         ["css=.ng-dirty", "css:finder"],
         ["xpath=//input[@type='text']", "xpath:attributes"],
