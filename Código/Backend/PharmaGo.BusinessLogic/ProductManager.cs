@@ -50,9 +50,19 @@ namespace PharmaGo.BusinessLogic
 
             if (_productRepository.Exists(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name && d.Deleted == false))
             {
-                throw new InvalidResourceException("The product already exists in that pharmacy.");
+                Product existingProduct = _productRepository.GetOneByExpression(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name);
+                if (existingProduct.Deleted)
+                {
+                    return Update(existingProduct.Id, product, token);
+                }
+                else
+                {
+                    throw new InvalidResourceException("The product already exists in that pharmacy.");
+                }
+
             }
-            
+
+
             product.Pharmacy.Id = pharmacyofProduct.Id;
             _productRepository.InsertOne(product);
             _productRepository.Save();
@@ -113,8 +123,8 @@ namespace PharmaGo.BusinessLogic
             {
                 throw new ResourceNotFoundException("The updated product is invalid.");
             }
-          
-            var productSaved = _productRepository.GetOneByExpression(d => d.Id == id && d.Deleted == false);
+
+            var productSaved = _productRepository.GetOneByExpression(d => d.Id == id);
             if (productSaved == null)
             {
                 throw new ResourceNotFoundException("The product to update does not exist.");
@@ -125,10 +135,6 @@ namespace PharmaGo.BusinessLogic
             var userId = session.UserId;
             User user = _userRepository.GetOneDetailByExpression(u => u.Id == userId);
 
-            if (_productRepository.Exists(d => d.Code == updateProduct.Code && d.Pharmacy.Name == user.Pharmacy.Name && d.Deleted == false))
-            {
-                throw new InvalidResourceException("A product with that code already exists in that pharmacy.");
-            }
             if (updateProduct.Code != "")
             {
                 productSaved.Code = updateProduct.Code;
@@ -145,6 +151,7 @@ namespace PharmaGo.BusinessLogic
             {
                 productSaved.Description = updateProduct.Description;
             }
+            productSaved.Deleted = updateProduct.Deleted;
             productSaved.ValidOrFail();
             _productRepository.UpdateOne(productSaved);
             _productRepository.Save();

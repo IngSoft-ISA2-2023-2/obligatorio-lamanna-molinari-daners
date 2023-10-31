@@ -54,16 +54,17 @@ namespace PharmaGo.SpecFlow.StepDefinitions
 
         }
 
-        [Given(@"I am an authorized employee")]
-        public void GivenIAmAnAuthorizedEmployee()
+        [Given(@"I am an authorized employee with ""([^""]*)""")]
+        public void GivenIAmAnAuthorizedEmployee(string token)
         {
             var httpContext = new DefaultHttpContext();
-            httpContext.Request.Headers["Authorization"] = "E9E0E1E9-3812-4EB5-949E-AE92AC931401";
+            httpContext.Request.Headers["Authorization"] = token;
 
             productController.ControllerContext = new ControllerContext()
             {
                 HttpContext = httpContext,
             };
+            productModel.PharmacyName = thePharmacyRepository.GetOneByExpression(p => p.Id == 1).Name;
         }
 
 
@@ -114,22 +115,13 @@ namespace PharmaGo.SpecFlow.StepDefinitions
             {
                 Assert.AreEqual(message, e.Message);
             }
-           
         }
 
         [AfterScenario]
         public void Teardown()
         {
-            try
-            {
-                Product p = theProductRepository.GetOneByExpression(p => p.Code == productModel.Code);
-                if (p != null) { productController.Delete(p.Id); }
-            }catch(Exception e)
-            {
-
-            }           
+            Product p = theProductRepository.GetOneByExpression(p => p.Code == productModel.Code && p.Pharmacy.Name == productModel.PharmacyName);
+            if (p != null) { productController.Delete(p.Id); }
         }
-
-
     }
 }
