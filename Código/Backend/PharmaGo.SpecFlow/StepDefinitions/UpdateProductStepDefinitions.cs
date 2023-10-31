@@ -131,5 +131,19 @@ namespace PharmaGo.SpecFlow.StepDefinitions
                 Assert.AreEqual(message, e.Message);
             }
         }
+
+        [AfterScenario]
+        public void Teardown()
+        {
+            try
+            {
+                Product p = theProductRepository.GetOneByExpression(p => p.Code == productModel.Code);
+                if (p != null) { productController.Delete(p.Id); }
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
     }
 }

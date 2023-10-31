@@ -48,7 +48,7 @@ namespace PharmaGo.BusinessLogic
                 throw new ResourceNotFoundException("The pharmacy of the product does not exist.");
             }
 
-            if (_productRepository.Exists(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name))
+            if (_productRepository.Exists(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name && d.Deleted == false))
             {
                 Product existingProduct = _productRepository.GetOneByExpression(d => d.Code == product.Code && d.Pharmacy.Name == pharmacyofProduct.Name);
                 if (existingProduct.Deleted)
