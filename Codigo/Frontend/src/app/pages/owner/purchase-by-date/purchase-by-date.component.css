@@ -1,0 +1,13 @@
+.customAlign{
+    text-align: center;
+}
+
+.inputDisable {
+    pointer-events: none;
+    border: 1px solid grey;
+    background-color: lightgrey;
+  }
+
+  .customAlignDateRange{
+    display: flex;
+  }

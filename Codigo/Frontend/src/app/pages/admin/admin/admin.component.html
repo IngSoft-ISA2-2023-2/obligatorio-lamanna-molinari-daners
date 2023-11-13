@@ -1,0 +1,56 @@
+<app-user-header title="Administrator" link="admin"></app-user-header>
+<c-container [fluid]="true"  class="mt-4">
+  <div class="row">
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-primary mb-0 mt-h">Invitation</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Create
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+              routerLink="/admin/create-invitation">
+              <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-primary mb-0 mt-h">Invitation</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            List
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+              routerLink="/admin/list-invitation"> 
+              <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card">
+        <div class="card-block p-1 clearfix">
+          <i class="fa fa-cogs bg-primary p-1 font-2xl mr-1 float-left"></i>
+          <div class="h5 text-primary mb-0 mt-h">Pharmacy</div>
+          <div class="text-muted text-uppercase font-weight-bold font-xs">
+            Create
+          </div>
+        </div>
+        <div class="card-footer p-x-1 py-h customCardIcon">
+          <a class="font-weight-bold font-xs btn-block text-muted" 
+              routerLink="/admin/create-pharmacy"> 
+              <svg cIcon [cIcon]="icons.cilArrowThickRight"></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</c-container>

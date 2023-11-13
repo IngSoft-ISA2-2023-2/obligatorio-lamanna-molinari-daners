@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExportationModel\ExportationModel.csproj" />
+    <ProjectReference Include="..\PharmaGo.Domain\PharmaGo.Domain.csproj" />
+    <ProjectReference Include="..\PharmaGo.Exceptions\PharmaGo.Exceptions.csproj" />
+    <ProjectReference Include="..\PharmaGo.IBusinessLogic\PharmaGo.IBusinessLogic.csproj" />
+    <ProjectReference Include="..\PharmaGo.IDataAccess\PharmaGo.IDataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

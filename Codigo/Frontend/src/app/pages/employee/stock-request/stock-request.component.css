@@ -1,0 +1,22 @@
+.customAlign{
+    text-align: center;
+}
+
+.customAlignDate{
+    display: flex;
+    margin-right: 70px;
+}
+
+.customMarginButton{
+    margin-right: 2px;
+}
+
+.inputDisable {
+    pointer-events: none;
+    border: 1px solid grey;
+    background-color: lightgrey;
+  }
+
+.customMargin{
+    margin-right: 5px;
+}

@@ -1,0 +1,92 @@
+<app-user-header title="Employee" link="employee"></app-user-header>
+<c-container class="mt-3">
+  <c-row [ngStyle]="{ width: '100%' }">
+    <c-col>
+      <c-row class="g-0 customAlign">
+        <h3>Create Request</h3>
+        <c-card [cBorder]="{ top: { color: 'info', width: 3 } }" class="mb-3">
+          <c-row class="g-0">
+            <c-card-body cCol [md]="8">
+              <p cCardText>
+                <c-row>
+                  <c-col>
+                    <c-input-group class="mb-3">
+                      <label cInputGroupText> Drug </label>
+                      <select class="form-select" (change)="onChange($event)">
+                        <option
+                          *ngFor="let drug of drugs"
+                          [value]="drug.code"
+                        >
+                          {{ drug.code }} - {{ drug.name }}
+                        </option>
+                      </select>
+                    </c-input-group>
+                  </c-col>
+                  <c-col class="mb-3">
+                    <c-input-group class="mb-3">
+                      <label cInputGroupText for="quantityInput">
+                        Quantity
+                      </label>
+                      <input
+                        cFormControl
+                        [(ngModel)]="quantity"
+                        id="quantityInput"
+                        value="1"
+                        min="1"
+                        type="number"
+                      />
+                    </c-input-group>
+                  </c-col>
+                  <c-col>
+                    <button
+                      (click)="addRequest()"
+                      title="Add"
+                      class="btn btn-outline-info"
+                    >
+                      Add
+                      <svg cIcon [cIcon]="icons.cilPlus"></svg>
+                    </button>
+                  </c-col>
+                  <c-col>
+                    <button
+                      [disabled]="requests.length> 0 ? null : 'disabled'" 
+                      (click)="createRequest()"
+                      title="Create Request"
+                      class="btn btn-outline-info">
+                      Create Request
+                      <svg cIcon [cIcon]="icons.cilSend"></svg>
+                    </button>
+                  </c-col>
+                </c-row>
+              </p>
+            </c-card-body>
+            <table cTable hover [responsive]="true" *ngIf="requests.length > 0">
+              <thead>
+                <tr>
+                  <th scope="col">Drug</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let r of requests; let indexOfelement = index">
+                  <td>{{ r.drug.code }}</td>
+                  <td>{{ r.quantity }}</td>
+                  <td>
+                    <button
+                      title="Delete"
+                      class="btn btn-outline-danger"
+                      (click)="deleteRequest(indexOfelement)"
+                    >
+                      <svg cIcon [cIcon]="icons.cilX"></svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </c-row>
+        </c-card>
+      </c-row>
+    </c-col>
+  </c-row>
+</c-container>
