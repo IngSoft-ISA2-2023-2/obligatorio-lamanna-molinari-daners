@@ -28,12 +28,12 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
-      run: dotnet restore Código/Backend/PharmaGo.sln
+      run: dotnet restore Codigo/Backend/PharmaGo.sln
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore Código/Backend/PharmaGo.sln
+      run: dotnet build --configuration Release --no-restore Codigo/Backend/PharmaGo.sln
 
     - name: Run Unit Tests
-      run: dotnet test Código/Backend/PharnaGo.Test/PharmaGo.Test.csproj
+      run: dotnet test Codigo/Backend/PharnaGo.Test/PharmaGo.Test.csproj
       
     
